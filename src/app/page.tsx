@@ -3,94 +3,33 @@ import ContactForm from "@/components/ui/contactForm";
 import Hero from "@/components/ui/hero";
 import HotelCard from "@/components/ui/hotelCard";
 import ProfessionalCard from "@/components/ui/professionalCard";
-import VoyageCard from "@/components/ui/voyageCard";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
+import {
+  fetchVoyagesOrg,
+  fetchVoyagesCart,
+  fetchVoyages3,
+  fetchHotels,
+} from "@/utils/getData";
+import { client } from "@/sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-export default function Home() {
-  const hotels = [
-    {
-      nom: "Hôtel Le Majestic",
-      etoile: 5,
-      image: "hotel-1.jpg",
-      prix: "250 TND",
-      addresse: "Centre-ville, Tunis",
-    },
-    {
-      nom: "Sahara Palace",
-      etoile: 4,
-      image: "hotel-1.jpg",
-      prix: "180 TND",
-      addresse: "Douz, Kébili",
-    },
-    {
-      nom: "Seaside Resort",
-      etoile: 4,
-      image: "hotel-1.jpg",
-      prix: "200 TND",
-      addresse: "Hammamet, Nabeul",
-    },
-    {
-      nom: "Mountain View Inn",
-      etoile: 3,
-      image: "hotel-1.jpg",
-      prix: "120 TND",
-      addresse: "Aïn Draham, Jendouba",
-    },
-    {
-      nom: "Golden Sands Hotel",
-      etoile: 5,
-      image: "hotel-1.jpg",
-      prix: "300 TND",
-      addresse: "Djerba, Médenine",
-    },
-    {
-      nom: "Oasis Retreat",
-      etoile: 3,
-      image: "hotel-1.jpg",
-      prix: "150 TND",
-      addresse: "Tozeur, Tozeur",
-    },
-  ];
+const { projectId, dataset } = client.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset })
+        .image(source)
+        .quality(80)
+        .format("webp")
+        .auto("format")
+    : null;
 
-  const voyages = [
-    {
-      destination: "Turquie",
-      ville: "Istanbul",
-      image: "/destination-1.jpg",
-      prix: "2000",
-    },
-    {
-      destination: "Egypte",
-      ville: "Le Caire",
-      image: "/destination-2.jpg",
-      prix: "1500",
-    },
-    {
-      destination: "France",
-      ville: "Paris",
-      image: "/destination-3.jpg",
-      prix: "2500",
-    },
-    {
-      destination: "Espagne",
-      ville: "Madrid",
-      image: "/destination-4.jpg",
-      prix: "2200",
-    },
-    {
-      destination: "Italie",
-      ville: "Rome",
-      image: "/destination-5.jpg",
-      prix: "1800",
-    },
-    {
-      destination: "Japon",
-      ville: "Tokyo",
-      image: "/destination-6.jpg",
-      prix: "3000",
-    },
-  ];
+export default async function Home() {
+  const voyages_org = await fetchVoyagesOrg();
+  const voyages_cart = await fetchVoyagesCart();
+  const voyages_3 = await fetchVoyages3();
+  const hotels = await fetchHotels();
   return (
     <div>
       <Hero />
@@ -100,16 +39,23 @@ export default function Home() {
             Nos hotels
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {hotels.map((hotel, index) => (
-              <HotelCard
-                key={index}
-                nom={hotel.nom}
-                etoile={hotel.etoile}
-                image={hotel.image}
-                prix={hotel.prix}
-                addresse={hotel.addresse}
-              />
-            ))}
+            {hotels &&
+              hotels.map((hotel, index) => (
+                <HotelCard
+                  key={index}
+                  nom={hotel.nom}
+                  etoile={hotel.etoile}
+                  image={
+                    hotel.mainImage
+                      ? urlFor(hotel.mainImage)?.width(550).height(310).url() ||
+                        ""
+                      : ""
+                  }
+                  prix={hotel.prix}
+                  addresse={hotel.adresse}
+                  slug={hotel.slug}
+                />
+              ))}
           </div>
           <Link className="mx-auto" href="/hotels">
             <Button
@@ -126,7 +72,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
             Voyages Organisés
           </h2>
-          <CarouselCards cards={voyages} />
+          {voyages_org && <CarouselCards cards={voyages_org} />}
 
           <Link className="mx-auto" href="/voyages">
             <Button
@@ -143,7 +89,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
             Voyages a la carte
           </h2>
-          <CarouselCards cards={voyages} />
+          {voyages_cart && <CarouselCards cards={voyages_cart} />}
 
           <Link className="mx-auto" href="/voyages">
             <Button
@@ -161,7 +107,6 @@ export default function Home() {
             Optimisez la gestion de vos déplacements
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* <ProfessionalCard titre="events" image="/event.jpeg" /> */}
             <ProfessionalCard
               titre="Véhicule avec chauffeur"
               image="/vip.jpg"
@@ -202,3 +147,86 @@ export default function Home() {
     </div>
   );
 }
+// const hotels = [
+//   {
+//     nom: "Hôtel Le Majestic",
+//     etoile: 5,
+//     image: "hotel-1.jpg",
+//     prix: "250 TND",
+//     addresse: "Centre-ville, Tunis",
+//   },
+//   {
+//     nom: "Sahara Palace",
+//     etoile: 4,
+//     image: "hotel-1.jpg",
+//     prix: "180 TND",
+//     addresse: "Douz, Kébili",
+//   },
+//   {
+//     nom: "Seaside Resort",
+//     etoile: 4,
+//     image: "hotel-1.jpg",
+//     prix: "200 TND",
+//     addresse: "Hammamet, Nabeul",
+//   },
+//   {
+//     nom: "Mountain View Inn",
+//     etoile: 3,
+//     image: "hotel-1.jpg",
+//     prix: "120 TND",
+//     addresse: "Aïn Draham, Jendouba",
+//   },
+//   {
+//     nom: "Golden Sands Hotel",
+//     etoile: 5,
+//     image: "hotel-1.jpg",
+//     prix: "300 TND",
+//     addresse: "Djerba, Médenine",
+//   },
+//   {
+//     nom: "Oasis Retreat",
+//     etoile: 3,
+//     image: "hotel-1.jpg",
+//     prix: "150 TND",
+//     addresse: "Tozeur, Tozeur",
+//   },
+// ];
+
+// const voyages = [
+//   {
+//     destination: "Turquie",
+//     ville: "Istanbul",
+//     image: "/destination-1.jpg",
+//     prix: "2000",
+//   },
+//   {
+//     destination: "Egypte",
+//     ville: "Le Caire",
+//     image: "/destination-2.jpg",
+//     prix: "1500",
+//   },
+//   {
+//     destination: "France",
+//     ville: "Paris",
+//     image: "/destination-3.jpg",
+//     prix: "2500",
+//   },
+//   {
+//     destination: "Espagne",
+//     ville: "Madrid",
+//     image: "/destination-4.jpg",
+//     prix: "2200",
+//   },
+//   {
+//     destination: "Italie",
+//     ville: "Rome",
+//     image: "/destination-5.jpg",
+//     prix: "1800",
+//   },
+//   {
+//     destination: "Japon",
+//     ville: "Tokyo",
+//     image: "/destination-6.jpg",
+//     prix: "3000",
+//   },
+// ];

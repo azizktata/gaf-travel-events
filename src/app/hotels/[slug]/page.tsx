@@ -3,35 +3,63 @@ import Tarifs from "@/components/ui/tarifs";
 import { Image } from "@nextui-org/image";
 import { LucideCircleDollarSign, MapPinIcon } from "lucide-react";
 import React from "react";
+import { client } from "@/sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { PortableText } from "next-sanity";
+import { fetchHotelBySlug } from "@/utils/getData";
+import { notFound } from "next/navigation";
 
-export default function page({ params }: { params: { slug: string } }) {
+const { projectId, dataset } = client.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset })
+        .image(source)
+        .quality(80)
+        .format("webp")
+        .auto("format")
+    : null;
+export default async function page({ params }: { params: { slug: string } }) {
+  const hotel = await fetchHotelBySlug(params);
+  if (!hotel) {
+    notFound();
+  }
+  const { nom, etoile, mainImage, prix, adresse, description, listImage } =
+    hotel;
+
+  const hotelImageUrl = mainImage
+    ? urlFor(mainImage)?.width(550).height(310).url()
+    : null;
+  const listImagesUrls = listImage.map((image) =>
+    image ? urlFor(image)?.width(550).height(310).url() : null
+  );
   return (
     <div>
       <div className="w-[90%] lg:w-[60%] mx-auto mt-8 lg:mt-16">
-        <BreadCrumbs BreadcrumbItems={["hotels", `${params.slug}`]} />
+        <BreadCrumbs BreadcrumbItems={["hotels", `${nom}`]} />
         <div>
           <div className="flex items-center gap-2 mt-8">
-            <h1 className="text-2xl  text-gray-800 mt-4 ">{params.slug}</h1>
-            <span className="text-sm">{"⭐".repeat(4)}</span>
+            <h1 className="text-2xl  text-gray-800 mt-4 ">{nom}</h1>
+            <span className="text-sm">{"⭐".repeat(etoile)}</span>
           </div>
 
           <div className="md:flex gap-4">
             <p className="text-sm text-gray-600 flex gap-2 mt-4">
               {" "}
-              <MapPinIcon size={16} /> Tunis, Hamamet{" "}
+              <MapPinIcon size={16} /> {adresse}{" "}
             </p>
 
             <p className="text-sm text-gray-600 flex gap-2 mt-4">
               {" "}
               <LucideCircleDollarSign size={16} /> a partir de{" "}
-              <span className="font-semibold">250 TND</span>{" "}
+              <span className="font-semibold text-black">{prix} TND</span>{" "}
             </p>
           </div>
 
           <div className="mt-8 flex flex-col md:flex-row gap-2 w-full">
             <div className="w-full ">
               <Image
-                src="/hotel-1.jpg"
+                src={hotelImageUrl || "https://placehold.co/550x310/png"}
                 alt="hotel"
                 width={986} // Use width={0} to enable automatic scaling with Tailwind classes
                 height={0}
@@ -39,34 +67,25 @@ export default function page({ params }: { params: { slug: string } }) {
               />
             </div>
             <div className="columns-2 gap-1 mb-1 md:flex md:flex-col">
-              <Image
-                src="/hotel-1.jpg"
-                alt="hotel"
-                width={500}
-                height={200}
-                className="object-cover rounded-xs"
-              />
-              <Image
-                src="/hotel-1.jpg"
-                alt="hotel"
-                width={500}
-                height={200}
-                className="object-cover rounded-xs"
-              />
+              {listImagesUrls.map((imageUrl, index) => (
+                <Image
+                  key={index}
+                  src={imageUrl || "https://placehold.co/550x310/png"}
+                  alt="hotel"
+                  width={500}
+                  height={200}
+                  className="object-cover rounded-xs"
+                />
+              ))}
             </div>
           </div>
         </div>
 
         <div className="mt-8 max-w-[74ch]">
-          <h2 className="text-gray-800 text-lg font-semibold">Description</h2>
-          <p className="text-gray-600 mt-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptates, cumque quod, nemo, quos dolorum quae quas repellendus
-            doloribus voluptatem. Quisquam voluptates, cumque quod, nemo, quos
-            dolorum quae quas repellendus doloribus voluptatem. Quisquam
-            voluptates, cumque quod, nemo, quos dolorum quae quas repellendus
-            doloribus voluptatem.
-          </p>
+          <h2 className="text-gray-800 text-lg font-semibold mb-4">
+            Description
+          </h2>
+          {description && <PortableText value={description} />}
         </div>
         <div className="mt-8 ">
           <Tarifs />

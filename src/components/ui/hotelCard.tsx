@@ -11,12 +11,14 @@ export default function HotelCard({
   image,
   prix,
   addresse,
+  slug,
 }: {
   nom: string;
   etoile: number;
   image: string;
   prix: string;
   addresse: string;
+  slug: string;
 }) {
   return (
     <Card className="pb-4 ">
@@ -44,7 +46,7 @@ export default function HotelCard({
           <p className="text-xs text-gray-500">A partir de</p>
           <p className="text-lg text-gray-700 font-semibold">{prix} TND</p>
         </div>
-        <Link href={`/hotel/${nom}`}>
+        <Link href={`/hotels/${nom.toLowerCase().replace(/ /g, "-")}`}>
           <Button className="   bg-[#ffce5b] text-lg rounded">Voir plus</Button>
         </Link>
       </CardFooter>

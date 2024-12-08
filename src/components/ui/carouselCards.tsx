@@ -7,6 +7,20 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import VoyageCard from "./voyageCard";
+
+import { client } from "@/sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+const { projectId, dataset } = client.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset })
+        .image(source)
+        .quality(80)
+        .format("webp")
+        .auto("format")
+    : null;
 export default function CarouselCards({ cards }) {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
@@ -27,7 +41,11 @@ export default function CarouselCards({ cards }) {
             <VoyageCard
               destination={card.destination}
               ville={card.ville}
-              image={card.image}
+              image={
+                card.mainImage
+                  ? urlFor(card.mainImage)?.width(550).height(310).url() || ""
+                  : ""
+              }
               prix={card.prix}
             />
           </CarouselItem>
