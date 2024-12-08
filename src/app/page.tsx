@@ -1,101 +1,204 @@
-import Image from "next/image";
+import CarouselCards from "@/components/ui/carouselCards";
+import ContactForm from "@/components/ui/contactForm";
+import Hero from "@/components/ui/hero";
+import HotelCard from "@/components/ui/hotelCard";
+import ProfessionalCard from "@/components/ui/professionalCard";
+import VoyageCard from "@/components/ui/voyageCard";
+import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const hotels = [
+    {
+      nom: "Hôtel Le Majestic",
+      etoile: 5,
+      image: "hotel-1.jpg",
+      prix: "250 TND",
+      addresse: "Centre-ville, Tunis",
+    },
+    {
+      nom: "Sahara Palace",
+      etoile: 4,
+      image: "hotel-1.jpg",
+      prix: "180 TND",
+      addresse: "Douz, Kébili",
+    },
+    {
+      nom: "Seaside Resort",
+      etoile: 4,
+      image: "hotel-1.jpg",
+      prix: "200 TND",
+      addresse: "Hammamet, Nabeul",
+    },
+    {
+      nom: "Mountain View Inn",
+      etoile: 3,
+      image: "hotel-1.jpg",
+      prix: "120 TND",
+      addresse: "Aïn Draham, Jendouba",
+    },
+    {
+      nom: "Golden Sands Hotel",
+      etoile: 5,
+      image: "hotel-1.jpg",
+      prix: "300 TND",
+      addresse: "Djerba, Médenine",
+    },
+    {
+      nom: "Oasis Retreat",
+      etoile: 3,
+      image: "hotel-1.jpg",
+      prix: "150 TND",
+      addresse: "Tozeur, Tozeur",
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const voyages = [
+    {
+      destination: "Turquie",
+      ville: "Istanbul",
+      image: "/destination-1.jpg",
+      prix: "2000",
+    },
+    {
+      destination: "Egypte",
+      ville: "Le Caire",
+      image: "/destination-2.jpg",
+      prix: "1500",
+    },
+    {
+      destination: "France",
+      ville: "Paris",
+      image: "/destination-3.jpg",
+      prix: "2500",
+    },
+    {
+      destination: "Espagne",
+      ville: "Madrid",
+      image: "/destination-4.jpg",
+      prix: "2200",
+    },
+    {
+      destination: "Italie",
+      ville: "Rome",
+      image: "/destination-5.jpg",
+      prix: "1800",
+    },
+    {
+      destination: "Japon",
+      ville: "Tokyo",
+      image: "/destination-6.jpg",
+      prix: "3000",
+    },
+  ];
+  return (
+    <div>
+      <Hero />
+      <div className="w-full mb-24">
+        <div className="w-[90%] mx-auto flex flex-col">
+          <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
+            Nos hotels
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {hotels.map((hotel, index) => (
+              <HotelCard
+                key={index}
+                nom={hotel.nom}
+                etoile={hotel.etoile}
+                image={hotel.image}
+                prix={hotel.prix}
+                addresse={hotel.addresse}
+              />
+            ))}
+          </div>
+          <Link className="mx-auto" href="/hotels">
+            <Button
+              variant="bordered"
+              className="btn mx-auto mt-16 border-[#00A9E0]/70 text-[#00A9E0] text-lg rounded"
+            >
+              Voir plus
+            </Button>
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="w-full mb-24">
+        <div className="w-[90%] mx-auto flex flex-col">
+          <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
+            Voyages Organisés
+          </h2>
+          <CarouselCards cards={voyages} />
+
+          <Link className="mx-auto" href="/voyages">
+            <Button
+              variant="bordered"
+              className="btn  mt-16 border-[#00A9E0]/70 text-[#00A9E0] text-lg rounded"
+            >
+              Voir plus
+            </Button>
+          </Link>
+        </div>
+      </div>
+      <div className="w-full mb-24">
+        <div className="w-[90%] mx-auto flex flex-col">
+          <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
+            Voyages a la carte
+          </h2>
+          <CarouselCards cards={voyages} />
+
+          <Link className="mx-auto" href="/voyages">
+            <Button
+              variant="bordered"
+              className="btn  mt-16 border-[#00A9E0]/70 text-[#00A9E0] text-lg rounded"
+            >
+              Voir plus
+            </Button>
+          </Link>
+        </div>
+      </div>
+      <div className="w-full mb-24">
+        <div className="w-[90%] mx-auto flex flex-col">
+          <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
+            Optimisez la gestion de vos déplacements
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* <ProfessionalCard titre="events" image="/event.jpeg" /> */}
+            <ProfessionalCard
+              titre="Véhicule avec chauffeur"
+              image="/vip.jpg"
+            />
+            <ProfessionalCard
+              titre="Team Building"
+              image="/team-building.jpg"
+            />
+            <ProfessionalCard titre="Events" image="/team-building.jpg" />
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-100 py-8 mb-24">
+        <h2 className="text-2xl font-bold text-center my-8 mb-16 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
+          Contactez nous
+        </h2>
+        <div className="max-w-md mx-auto">
+          <ContactForm />
+        </div>
+      </div>
+
+      <div className="w-full">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51055.091839307366!2d10.1815323!3d36.89170609999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34b1c25e38a1%3A0x9f17f7e724020f4d!2sMosqu%C3%A9e%20Les%20Jasmins!5e0!3m2!1sfr!2stn!4v1733604364538!5m2!1sfr!2stn"
+          style={{
+            border: 0,
+            width: "100%",
+            height: "480px",
+          }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="dolphin equipements map"
+          aria-placeholder="Angle Rue d’egypte Rue d’espagne 2013, Ben arus Tunis"
+        ></iframe>
+      </div>
     </div>
   );
 }
