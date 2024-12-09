@@ -32,7 +32,7 @@ export default async function Home() {
   const hotels = await fetchHotels();
   return (
     <div>
-      <Hero />
+      <Hero offres={voyages_3} />
       <div className="w-full mb-24">
         <div className="w-[90%] mx-auto flex flex-col">
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
@@ -53,7 +53,7 @@ export default async function Home() {
                   }
                   prix={hotel.prix}
                   addresse={hotel.adresse}
-                  slug={hotel.slug}
+                  slug={hotel.slug.current}
                 />
               ))}
           </div>
@@ -129,7 +129,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="w-full">
+      {/* <div className="w-full">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51055.091839307366!2d10.1815323!3d36.89170609999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34b1c25e38a1%3A0x9f17f7e724020f4d!2sMosqu%C3%A9e%20Les%20Jasmins!5e0!3m2!1sfr!2stn!4v1733604364538!5m2!1sfr!2stn"
           style={{
@@ -143,7 +143,7 @@ export default async function Home() {
           title="dolphin equipements map"
           aria-placeholder="Angle Rue d’egypte Rue d’espagne 2013, Ben arus Tunis"
         ></iframe>
-      </div>
+      </div> */}
     </div>
   );
 }

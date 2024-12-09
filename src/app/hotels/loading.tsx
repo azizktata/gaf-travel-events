@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function loading() {
   return (
-    <div className="w-[90%] lg:w-[70%] mx-auto ">
+    <div className="w-[90%] lg:w-[70%] mx-auto min-h-[100vh]">
       <div className="my-8">
         <Skeleton className="h-4 w-[250px]" />
       </div>

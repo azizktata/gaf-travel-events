@@ -11,7 +11,20 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@nextui-org/button";
-export default function Hero() {
+import { client } from "@/sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+const { projectId, dataset } = client.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset })
+        .image(source)
+        .quality(80)
+        .format("webp")
+        .auto("format")
+    : null;
+export default function Hero({ offres }: { offres: any }) {
   const covers = [
     "/destination-1.jpg",
     "/destination-2.jpg",
@@ -28,14 +41,14 @@ export default function Hero() {
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
-        {covers.map((image, index) => (
+        {offres.map((offre, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
               <Card className="relative w-full h-[600px] rounded-lg overflow-hidden shadow-xl bg-gray-800">
                 {/* Price Header */}
                 <CardHeader className="absolute z-10 left-0 right-0 flex justify-center mt-32 flex flex-col mx-auto max-w-xs bg-white/90 rounded-xs px-4 py-2">
                   <p className="text-[#005bc4] font-semibold">
-                    7 jours / 6 nuités
+                    {offre.duration}
                   </p>
                 </CardHeader>
 
@@ -44,20 +57,29 @@ export default function Hero() {
                   removeWrapper
                   alt="Card background"
                   className="absolute z-0 w-full h-full object-cover"
-                  src={image}
+                  src={
+                    offre.mainImage
+                      ? urlFor(offre.mainImage)
+                          ?.width(1920)
+                          .height(1080)
+                          .url() || ""
+                      : ""
+                  }
                 />
 
                 {/* Body Content */}
                 <CardBody className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent">
                   <div className="text-center">
                     <h1 className="text-white font-bold text-3xl lg:text-5xl tracking-wide">
-                      Medina
+                      {offre.destination}
                     </h1>
                   </div>
                   <p className="text-xs text-white uppercase font-light mt-10">
                     À partir de
                   </p>
-                  <h4 className="text-white font-bold text-2xl">250 TND</h4>
+                  <h4 className="text-white font-bold text-2xl">
+                    {offre.prix} TND
+                  </h4>
                 </CardBody>
 
                 {/* Footer Button */}

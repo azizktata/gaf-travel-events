@@ -27,6 +27,37 @@ import { sanityFetch } from "@/sanity/live";
 
       const HOTEL_QUERY_SLUG = defineQuery(`*[_type == "hotel" && slug.current == $slug][0]`);
 
+      const HOTEL_FITLER_QUERY = (typeFilter: string, destinationFilter: string) =>
+        defineQuery(`
+          *[_type == "hotel" 
+          ${typeFilter ? `&& etoile == ${typeFilter}` : ""}
+          ${destinationFilter ? `&& adresse == "${destinationFilter}"` : ""}
+          ]
+        `);
+
+        const HOTEL_DEST_QUERY = defineQuery(`*[
+          _type == "hotel"
+          ]{adresse}`);
+
+
+          const VOYAGE_FILTER_QUERY = (typeFilter: string, destinationFilter: string) =>
+            defineQuery(`
+               *[_type == "post" 
+                ${typeFilter ? `&& type == "${typeFilter}"` : ""}
+                ${destinationFilter ? `&& destination == "${destinationFilter}"` : ""}
+                ]
+            `);
+
+            const VOYAGE_DEST_QUERY = defineQuery(`*[
+              _type == "post"
+              ]{destination}`);
+
+            const VOYAGE_QUERY_SLUG = defineQuery(`*[_type == "post" && slug.current == $slug][0]`);
+
+            const VISA_QUERY = defineQuery(`*[
+              _type == "pageVisa"
+              ]`);
+
       export async function fetchVoyagesOrg() {
         const { data } = await sanityFetch({ query: VOYAGE_ORG_QUERY });
         return data;
@@ -51,5 +82,37 @@ import { sanityFetch } from "@/sanity/live";
             throw new Error("Missing 'slug' parameter");
           }
         const { data } = await sanityFetch({ query: HOTEL_QUERY_SLUG, params});
+        return data;
+      }
+
+      export async function fetchHotelsByFilterOpions(typeFilter:string, destinationFilter:string) {
+        const { data } = await sanityFetch({ query: HOTEL_FITLER_QUERY(typeFilter, destinationFilter) });
+        return data;
+      }
+
+      export async function fetchNDestOfHotels() {
+        const { data } = await sanityFetch({ query: HOTEL_DEST_QUERY });
+        return data;
+      }
+      export async function fetchVoaygesByFilterOpions(typeFilter:string, destinationFilter:string) {
+        const { data } = await sanityFetch({ query: VOYAGE_FILTER_QUERY(typeFilter, destinationFilter) });
+        return data;
+      }
+
+      export async function fetchDestOfVoyages() {
+        const { data } = await sanityFetch({ query: VOYAGE_DEST_QUERY });
+        return data;
+      }
+
+      export async function fetchVoyageBySlug(params) {
+        if (!params || !params.slug) {
+            throw new Error("Missing 'slug' parameter");
+          }
+        const { data } = await sanityFetch({ query: VOYAGE_QUERY_SLUG, params});
+        return data;
+      }
+
+      export async function fetchVisa() {
+        const { data } = await sanityFetch({ query: VISA_QUERY });
         return data;
       }

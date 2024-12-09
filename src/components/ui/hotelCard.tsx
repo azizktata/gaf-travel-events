@@ -46,7 +46,7 @@ export default function HotelCard({
           <p className="text-xs text-gray-500">A partir de</p>
           <p className="text-lg text-gray-700 font-semibold">{prix} TND</p>
         </div>
-        <Link href={`/hotels/${nom.toLowerCase().replace(/ /g, "-")}`}>
+        <Link href={`/hotels/${slug}`}>
           <Button className="   bg-[#ffce5b] text-lg rounded">Voir plus</Button>
         </Link>
       </CardFooter>

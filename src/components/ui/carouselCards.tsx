@@ -47,6 +47,7 @@ export default function CarouselCards({ cards }) {
                   : ""
               }
               prix={card.prix}
+              slug={card.slug.current}
             />
           </CarouselItem>
         ))}

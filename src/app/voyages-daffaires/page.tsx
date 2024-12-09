@@ -165,13 +165,13 @@ export default function page() {
             <div className="w-[90%] px-4 mx-auto lg:w-1/2 xl:w-5/12">
               <div className="mt-10 lg:mt-0">
                 <h2 className="mb-5 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
-                  simplifier les déplacements de vos collaborateurs et à
-                  maîtriser durablement votre budget voyage
+                  VIP
                 </h2>
                 <p className="mb-5 text-lg text-gray-800 font-light">
                   GAF vous propose aujourd’hui un nouveau regard sur les
                   déplacements professionnels d’entreprise de vos
-                  collaborateurs.
+                  collaborateurs. simplifier les déplacements de vos
+                  collaborateurs et à maîtriser durablement votre budget voyage
                 </p>
               </div>
             </div>
@@ -185,7 +185,7 @@ export default function page() {
               NOS SERVICES
             </h3>
             <p className="max-w-[70ch] text-lg text-gray-700 font-light">
-              TTA est un excellent partenaire pour beaucoup d’entreprises grâce
+              GAF est un excellent partenaire pour beaucoup d’entreprises grâce
               à des offres personnalisées et adaptées à tous les besoins, Nous
               perfectionnons sans cesse nos services afin que votre voyage ne
               soit plus un coût mais un avantage pour votre entreprise.

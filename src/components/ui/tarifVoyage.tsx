@@ -2,12 +2,8 @@
 
 import React from "react";
 import ReservationForm from "./reservationForm";
-
-interface Periode {
-  periode?: string;
-  tarif?: number;
-  _key: string;
-}
+import { Button } from "@nextui-org/button";
+import { Periode } from "@/types";
 
 export default function TarifVoyage({
   periodes,
@@ -38,10 +34,9 @@ export default function TarifVoyage({
   return (
     <div>
       {periodes && (
-        <div className="tarifs">
-          <h1>Tarifs</h1>
-          <div className="tarifs-services-voyage">
-            {periodes.map((periode: any) => (
+        <div className="mb-8 flex flex-col">
+          <div className="flex flex-col gap-1 items-start">
+            {periodes.map((periode: Periode) => (
               <div key={periode._key}>
                 <input
                   type="radio"
@@ -56,7 +51,8 @@ export default function TarifVoyage({
                 </label>
               </div>
             ))}
-            <p className="tarifs-price">
+
+            <p className="text-xl font-bold ml-auto">
               {selectedPeriode.prix && (
                 <>
                   {selectedPeriode?.prix}
@@ -65,15 +61,20 @@ export default function TarifVoyage({
               )}{" "}
             </p>
           </div>
-          <div className="tarifs-reserver">
-            <button onClick={() => setShow((prev) => !prev)}>reserver</button>
+          <div className="flex mt-4 justify-end">
+            <Button
+              variant="solid"
+              color="primary"
+              onClick={() => setShow((prev) => !prev)}
+            >
+              reserver
+            </Button>
           </div>
         </div>
       )}
       {show && (
         <div style={isDisplayed} className="form-main">
-          <h4 className="form-title">Formulaire de réservation</h4>{" "}
-          <ReservationForm />
+          <ReservationForm destination={destination} />
         </div>
       )}
     </div>

@@ -13,16 +13,16 @@ export default function VoyageCard2({
   prix,
   image,
   periodes,
-  activites,
+  slug,
 }: {
   titre: string;
-  hotels: string[];
+  hotels: any;
   destination: string;
   duration: string;
   prix: string;
   image: string;
-  periodes: string[];
-  activites: string[];
+  periodes: any;
+  slug: string;
 }) {
   return (
     <Card className="pb-4 ">
@@ -37,14 +37,13 @@ export default function VoyageCard2({
       <CardBody className="pb-8 pt-2 px-4 flex-col items-start gap-4">
         <h3 className="text-2xl text-black">{titre}</h3>
         <div className="flex items-center gap-2">
-          <Hotel size={16} />
-          {hotels.map((hotel) => (
-            <p key={hotel} className="text-sm text-gray-500">
-              {hotel}
-            </p>
-          ))}
-
-          <span className="text-xs">{"⭐".repeat(4)}</span>
+          {hotels &&
+            hotels.map((hotel) => (
+              <div key={hotel.hotel} className="flex items-center gap-2">
+                <Hotel size={16} />
+                <span className="text-sm text-gray-500">{hotel.hotel}</span>
+              </div>
+            ))}
         </div>
         <div className="flex gap-2">
           <p className="text-xs text-gray-500 flex gap-2">
@@ -55,8 +54,12 @@ export default function VoyageCard2({
           </p>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="text-sm text-[#00A9E0] "> {periodes.join(" - ")}</p>
-          <p className="text-sm text-[#00A9E0] ">{activites.join(" - ")}</p>
+          {periodes &&
+            periodes.map((per, index) => (
+              <p key={index} className="text-sm text-[#00A9E0] ">
+                {per.periode}
+              </p>
+            ))}
         </div>
       </CardBody>
       <CardFooter className="flex justify-between items-center border-t  py-4">
@@ -64,7 +67,7 @@ export default function VoyageCard2({
           <p className="text-xs text-gray-500">A partir de</p>
           <p className="text-lg text-gray-700 font-semibold">{prix} TND</p>
         </div>
-        <Link href={`/voyages/${titre}`}>
+        <Link href={`/voyages/${slug}`}>
           <Button className="   bg-[#ffce5b] text-lg rounded">Voir plus</Button>
         </Link>
       </CardFooter>

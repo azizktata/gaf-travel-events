@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Send } from "lucide-react";
 import { sendEmail } from "@/utils/email";
 import { toast } from "sonner";
+import { HotelFormData } from "@/types";
 
 const formSchema = z.object({
   nom: z.string().min(2, { message: "entrez votre nom." }),
@@ -28,7 +29,15 @@ const formSchema = z.object({
     message: "entrez un sujet valide.",
   }),
 });
-export default function ReservationForm() {
+export default function ReservationForm({
+  hotelForm,
+  destination,
+  voyageForm,
+}: {
+  hotelForm?: HotelFormData;
+  destination: string;
+  voyageForm?: string;
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,12 +49,42 @@ export default function ReservationForm() {
     },
   });
   const isLoading = form.formState.isSubmitting;
+  const generateHotelFormText = (formData: HotelFormData | null): string => {
+    if (!formData) {
+      return "null";
+    }
 
+    const { dateRange, pension, chambres } = formData;
+
+    const dateRangeText = `Stay duration: ${dateRange.start.toString()} to ${dateRange.end.toString()}`;
+    const pensionText = `Pension type: ${pension}`;
+
+    const chambresText = chambres
+      .map((chambre) => {
+        const adults = chambre.selectedAdults || "Not specified";
+        const enfants = chambre.selectedEnfants || "Not specified";
+        const litBebe = chambre.selectedLitBebe || "Not specified";
+        return `Chambre ${chambre.id}: Adults (${
+          adults == "Adulte(s)" ? "0" : adults
+        }), Enfants (${enfants == "Enfant(s)" ? "0" : enfants}), Lit(s) Bébé (${
+          litBebe == "Lit(s) bébé" ? "0" : litBebe
+        })`;
+      })
+      .join("\n");
+
+    return `${dateRangeText}\n${pensionText}\n${chambresText}`;
+  };
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prénom} \nEmail: ${values.email}\n Télephone: ${values.Télephone}`;
+    const hotelFormText = hotelForm ? generateHotelFormText(hotelForm) : "";
+    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prénom} \nAdultes: ${values.adultes} \nEmail: ${values.email}\n Télephone: ${values.Télephone}`;
+    const voyageFormText = voyageForm ? `Voyage: ${voyageForm}` : "";
     const res = await sendEmail({
-      text: mailText,
-      sujet: "Nouveau message de réservation",
+      text: hotelForm
+        ? `${mailText}\n\n${hotelFormText}`
+        : `${mailText}\n\n${voyageFormText}`,
+      sujet: hotelForm
+        ? `Nouveau message de réservation d'Hôtel ${destination}`
+        : `Nouveau message de réservation Voyage ${destination}`,
       email: values.email,
     });
     if (res?.success) {

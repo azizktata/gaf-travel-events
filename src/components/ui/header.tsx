@@ -17,6 +17,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
+import { Phone } from "lucide-react";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -26,7 +27,14 @@ export default function Header() {
     { label: "Visa", path: "/visa" },
     { label: "Voyage d'affaire", path: "/voyage-affaire" },
   ];
-
+  const handleWhatsAppCall = () => {
+    const phoneNumber = "19344320976";
+    const url = `https://wa.me/${phoneNumber}`;
+    window.open(url, "_blank");
+  };
+  const handleMenuItemClick = () => {
+    setIsMenuOpen(false); // Close the menu when an item is clicked
+  };
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} isMenuOpen={isMenuOpen} isBordered>
       <NavbarContent>
@@ -44,7 +52,9 @@ export default function Header() {
       <NavbarContent className="hidden sm:flex gap-16 text-lg" justify="center">
         <Dropdown>
           <NavbarItem>
-            <DropdownTrigger>Voayges</DropdownTrigger>
+            <DropdownTrigger className="cursor-pointer">
+              Voyages
+            </DropdownTrigger>
           </NavbarItem>
           <DropdownMenu
             aria-label="Produits Dolhpines"
@@ -84,14 +94,24 @@ export default function Header() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button color="primary" href="#" variant="flat">
+          <Button
+            color="primary"
+            className="flex gap-2"
+            href="#"
+            variant="bordered"
+            onPress={handleWhatsAppCall}
+          >
+            <Phone size={16} />
             +216 71 352 114
           </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem
+            onClick={handleMenuItemClick}
+            key={`${item}-${index}`}
+          >
             <Link
               className="w-full"
               color={

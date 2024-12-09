@@ -137,10 +137,10 @@ export default function VisaForm() {
 
         <FormField
           control={form.control}
-          name="Visa"
+          name="Country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>type de visa</FormLabel>
+              <FormLabel>Pays</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -148,11 +148,11 @@ export default function VisaForm() {
                 >
                   <FormControl>
                     <SelectTrigger className="bg-white">
-                      <SelectValue placeholder="Select Type de visa" />
+                      <SelectValue placeholder="Select le pays" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="USA">Visa de transit</SelectItem>
+                    <SelectItem value="USA">USA</SelectItem>
                     <SelectItem value="France">France</SelectItem>
                     <SelectItem value="Portugal">Allemagne</SelectItem>
                     <SelectItem value="Allemagne">Portugal</SelectItem>
@@ -166,10 +166,10 @@ export default function VisaForm() {
         />
         <FormField
           control={form.control}
-          name="Country"
+          name="Visa"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Country</FormLabel>
+              <FormLabel>Type de visa</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -177,7 +177,7 @@ export default function VisaForm() {
                 >
                   <FormControl>
                     <SelectTrigger className="bg-white">
-                      <SelectValue placeholder="Select Country" />
+                      <SelectValue placeholder="Select le type de visa" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>

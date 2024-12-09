@@ -2,16 +2,19 @@ import React from "react";
 import { Card, CardHeader, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
+import Link from "next/link";
 export default function VoyageCard({
   destination,
   ville,
   prix,
   image,
+  slug,
 }: {
   destination: string;
   ville: string;
   prix: string;
   image: string;
+  slug: string;
 }) {
   return (
     <Card className="h-[300px] w-full">
@@ -38,9 +41,11 @@ export default function VoyageCard({
             {prix} <span className="font-light">TND </span>
           </p>
         </div>
-        <Button className="px-6 py-3 bg-primary-600 text-white font-medium rounded text-lg  hover:bg-primary-700 shadow-lg">
-          J&apos;en profite
-        </Button>
+        <Link href={`/voyages/${slug}`}>
+          <Button className="px-6 py-3 bg-primary-600 text-white font-medium rounded text-lg  hover:bg-primary-700 shadow-lg">
+            J&apos;en profite
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

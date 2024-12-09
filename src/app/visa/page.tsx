@@ -1,9 +1,11 @@
 import VisaForm from "@/components/ui/visaForm";
+import { fetchVisa } from "@/utils/getData";
 import { Card, CardBody } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import React from "react";
 
-export default function page() {
+export default async function page() {
+  const visa = await fetchVisa();
   return (
     <div>
       <div className="w-full mb-16">
@@ -21,7 +23,7 @@ export default function page() {
             <div className="max-w-[60ch] mx-auto flex flex-col items-center">
               <h1 className="mb-2  font-medium text-3xl lg:text-5xl  tracking-widest text-white ">
                 {" "}
-                Les types de visas
+                DEMANDE DE VISA
               </h1>
             </div>
           </CardBody>
@@ -44,15 +46,20 @@ export default function page() {
             </p>
           </div>
 
-          {/* {visas && visas?.map((visa, index) => (
-          <div key={index} className="mb-12 lg:mb-16">
-            
-              <h3 className="text-2xl font-medium text-gray-800 lg:text-3xl mb-4 after:content-[''] after:block after:w-1/4 after:h-[1px] after:bg-[#30085E] after:mt-2 after:rounded-md after:scale-x-100 after:origin-left">
-              {visa.type}</h3>
-              <p className="max-w-[60ch] text-lg text-gray-700 font-light">{visa.description}</p>
-          
-        </div>
-          ))} */}
+          <h3 className="text-2xl font-medium text-gray-800 lg:text-3xl mb-8  after:content-[''] after:block after:w-1/4 after:h-[1px] after:bg-[#30085E] after:mt-2 after:rounded-md after:scale-x-100 after:origin-left">
+            Les types de visa?
+          </h3>
+          {visa &&
+            visa?.map((visa, index) => (
+              <div key={index} className="mb-12 lg:mb-16">
+                <h3 className="text-xl font-semibold text-gray-800  mb-2 ">
+                  {visa.type}
+                </h3>
+                <p className="max-w-[60ch] text-lg text-gray-700 font-light">
+                  {visa.description}
+                </p>
+              </div>
+            ))}
           <div className="form-main">
             <VisaForm />
           </div>
