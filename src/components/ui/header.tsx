@@ -65,17 +65,12 @@ export default function Header() {
           >
             <DropdownItem>
               <Link className="text-base" href="/voyages?type=voyage-organise">
-                Voayges organisés
+                Voyages organisés
               </Link>
             </DropdownItem>
             <DropdownItem>
               <Link className="text-base" href="/voyages?type=voyage-carte">
                 voyages a la carte
-              </Link>
-            </DropdownItem>
-            <DropdownItem>
-              <Link className="text-base" href="/voyages-daffaires">
-                voyages d&apos;affaires
               </Link>
             </DropdownItem>
           </DropdownMenu>
@@ -84,6 +79,11 @@ export default function Header() {
         <NavbarItem>
           <Link color="foreground" href="/hotels">
             Hotels
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link className="text-base" href="/voyages-daffaires">
+            voyages d&apos;affaires
           </Link>
         </NavbarItem>
         <NavbarItem>

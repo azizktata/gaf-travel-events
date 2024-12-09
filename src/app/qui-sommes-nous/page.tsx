@@ -23,7 +23,7 @@ export default function page() {
                 Qui sommes nous?
               </h1>
               <p className="text-lg  text-white/70 tracking-widest font-medium ">
-                Gaf Travel & Events
+                GAF Travel & Events
               </p>
             </div>
           </CardBody>
@@ -36,13 +36,13 @@ export default function page() {
               Qui sommes nous?
             </h3>
             <p className="max-w-[70ch] text-lg text-gray-700 font-light">
-              Bienvenue chez Dolphin Équipements, un acteur incontournable dans
-              le domaine de l&apos;hydraulique et des services en Tunisie.
-              <span className="block mt-2"></span>
-              En tant que membre du groupe FLEXIMAT France, fort de plus de 20
-              ans d&apos;expertise, nous sommes fiers de proposer des solutions
-              innovantes et adaptées aux besoins des professionnels dans divers
-              secteurs, tels que l&apos;industrie, le BTP et la marine.
+              Bienvenue chez GAF Travel & Events, où commencent vos voyages
+              inoubliables !<span className="block mt-2"></span>
+              Basée en Tunisie, notre agence met son expertise et sa passion à
+              votre service pour créer des expériences uniques. Que vous rêviez
+              de destinations exotiques, d&apos;aventures sur mesure, ou de
+              déplacements professionnels bien organisés, nous avons les
+              solutions adaptées à vos besoins.
             </p>
           </div>
 
@@ -51,89 +51,88 @@ export default function page() {
               Notre mission
             </h3>
             <p className="max-w-[60ch] text-lg text-gray-700 font-light">
-              Fournir des produits et services hydrauliques et pneumatiques de
-              qualité, conçus pour optimiser vos performances et garantir la
-              durabilité de vos équipements.
+              Chez GAF Travel & Events, notre mission est de fournir des
+              services de voyage et d&apos;organisation d&apos;événements
+              d&apos;exception, en alliant créativité et professionnalisme.
               <span className="block mt-2"></span>
-              Que ce soit pour la vente, la maintenance ou le nettoyage des
-              circuits hydrauliques, nous nous engageons à vous accompagner avec
-              expertise et professionnalisme.
+              Nous sommes passionnés par la mise en valeur du riche patrimoine
+              tunisien tout en offrant des solutions personnalisées pour
+              répondre à toutes vos attentes.
             </p>
           </div>
 
           <div className="mb-12 lg:mb-16 ">
             <h3 className="text-2xl font-medium text-gray-800 lg:text-3xl mb-4  after:content-[''] after:block after:w-1/4 after:h-[1px] after:bg-[#30085E] after:mt-2 after:rounded-md after:scale-x-100 after:origin-left">
-              Nos valeurs
+              Nos services
             </h3>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
-              Chez Dolphin Équipements, nos valeurs fondamentales sont le socle
-              de notre engagement envers nos clients, nos partenaires et notre
-              équipe.
-            </p>
+
             <ul className="max-w-[70ch] text-lg text-gray-700 font-light space-y-4 leading-relaxed">
               <li>
-                <span className="font-medium text-gray-700">
-                  Expertise et Excellence
+                <span className="font-semibold text-gray-700">
+                  Voyages organisés
                 </span>{" "}
-                Nous mettons notre savoir-faire au service de vos besoins en
-                garantissant des produits et services de qualité supérieure
+                Explorez les plus belles destinations à travers des itinéraires
+                soigneusement préparés pour vous garantir une expérience
+                enrichissante et sans stress.
               </li>
               <li>
-                <span className="font-medium text-gray-700">
-                  Innovation Continue
+                <span className="font-semibold text-gray-700">
+                  Voyages à la carte
                 </span>{" "}
-                Nous adoptons des solutions novatrices pour répondre aux défis
-                modernes et offrir des performances optimales.{" "}
+                Composez votre voyage sur mesure selon vos envies et vos
+                besoins. Laissez-nous transformer vos rêves en réalité.
               </li>
               <li>
-                <span className="font-medium text-gray-700">
-                  Proximité et Confiance
+                <span className="font-semibold text-gray-700">
+                  Voyages d&apos;affaires
                 </span>{" "}
-                Nous construisons des relations durables basées sur la
-                transparence et la satisfaction de nos clients.
+                Simplifiez vos déplacements professionnels grâce à notre service
+                dédié, combinant confort, ponctualité et professionnalisme.
               </li>
             </ul>
           </div>
           <div className="mb-12 lg:mb-16 ">
             <h3 className="text-2xl font-medium text-gray-800 lg:text-3xl mb-4  after:content-[''] after:block after:w-1/4 after:h-[1px] after:bg-[#30085E] after:mt-2 after:rounded-md after:scale-x-100 after:origin-left">
               {" "}
-              Pourquoi choisir dolphin équipements ?
+              Pourquoi choisir GAF Travel & Events ?
             </h3>
             <ul className="max-w-[70ch] text-lg text-gray-700 font-light space-y-4 leading-relaxed mb-6">
               <li>
-                <span className="font-medium text-gray-700">
-                  Expertise reconnue:
+                <span className="font-semibold text-gray-700">
+                  Expertise internationale :
                 </span>{" "}
-                Grâce à notre appartenance au groupe FLEXIMAT France.
+                Grâce à notre réseau de partenaires, nous vous offrons des
+                expériences uniques à travers le monde.
               </li>
               <li>
-                <span className="font-medium text-gray-700">
-                  Produits de qualité:
+                <span className="font-semibold text-gray-700">
+                  Personnalisation :
                 </span>{" "}
-                Adaptés aux exigences des secteurs industriels, du BTP et de la
-                marine.
+                Chaque voyage est conçu sur mesure pour répondre à vos attentes.
               </li>
               <li>
-                <span className="font-medium text-gray-700">
-                  Services personnalisés:
+                <span className="font-semibold text-gray-700">
+                  Fiabilité et professionnalisme:
                 </span>{" "}
-                Un accompagnement de proximité pour répondre à tous vos besoins.
+                Nous gérons chaque détail pour que vous puissiez voyager en
+                toute tranquillité.
+              </li>
+              <li>
+                <span className="font-semibold text-gray-700">
+                  Engagement qualité:
+                </span>{" "}
+                Nous nous efforçons d’offrir un service irréprochable, quelle
+                que soit la nature de votre voyage.
               </li>
             </ul>
             <p className="text-lg max-w-[70ch] text-gray-700 font-light leading-relaxed">
-              Chez{" "}
-              <span className="font-medium text-gray-700">
-                Dolphin Équipements
+              Avec{" "}
+              <span className="font-semibold text-gray-700">
+                GAF Travel & Events
               </span>
-              , nous faisons bien plus que vendre des équipements : nous
-              devenons votre partenaire de confiance pour toutes vos solutions
-              hydrauliques et pneumatiques.
-              <span className="block mt-2">
-                Venez nous rencontrer à{" "}
-                <span className="font-medium">Tunis</span> et découvrez comment
-                nous pouvons vous aider à optimiser vos performances et garantir
-                la fiabilité de vos équipements !
-              </span>
+              ,partez à la découverte du monde et créez des souvenirs
+              inoubliables. Faites-nous confiance pour transformer vos idées en
+              voyages extraordinaires.
             </p>
           </div>
         </div>

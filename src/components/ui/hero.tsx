@@ -25,11 +25,6 @@ const urlFor = (source: SanityImageSource) =>
         .auto("format")
     : null;
 export default function Hero({ offres }: { offres: any }) {
-  const covers = [
-    "/destination-1.jpg",
-    "/destination-2.jpg",
-    "/destination-3.jpg",
-  ];
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
@@ -43,8 +38,8 @@ export default function Hero({ offres }: { offres: any }) {
       <CarouselContent>
         {offres.map((offre, index) => (
           <CarouselItem key={index}>
-            <div className="p-1">
-              <Card className="relative w-full h-[600px] rounded-lg overflow-hidden shadow-xl bg-gray-800">
+            <div>
+              <Card className="relative w-full h-[600px]  overflow-hidden shadow-xl bg-gray-800">
                 {/* Price Header */}
                 <CardHeader className="absolute z-10 left-0 right-0 flex justify-center mt-32 flex flex-col mx-auto max-w-xs bg-white/90 rounded-xs px-4 py-2">
                   <p className="text-[#005bc4] font-semibold">
@@ -66,6 +61,7 @@ export default function Hero({ offres }: { offres: any }) {
                       : ""
                   }
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-linear"></div>
 
                 {/* Body Content */}
                 <CardBody className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent">

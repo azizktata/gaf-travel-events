@@ -33,10 +33,10 @@ export default async function Home() {
   return (
     <div>
       <Hero offres={voyages_3} />
-      <div className="w-full mb-24">
-        <div className="w-[90%] mx-auto flex flex-col">
+      <div className="w-full my-24">
+        <div className="w-[85%] mx-auto flex flex-col">
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
-            Nos hotels
+            Collection d’hôtels d’exception
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {hotels &&
@@ -68,9 +68,9 @@ export default async function Home() {
         </div>
       </div>
       <div className="w-full mb-24">
-        <div className="w-[90%] mx-auto flex flex-col">
+        <div className="w-[85%] mx-auto flex flex-col">
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
-            Voyages Organisés
+            Circuits Organisés Haut de Gamme
           </h2>
           {voyages_org && <CarouselCards cards={voyages_org} />}
 
@@ -85,9 +85,9 @@ export default async function Home() {
         </div>
       </div>
       <div className="w-full mb-24">
-        <div className="w-[90%] mx-auto flex flex-col">
+        <div className="w-[85%] mx-auto flex flex-col">
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
-            Voyages a la carte
+            Voyages à la Carte
           </h2>
           {voyages_cart && <CarouselCards cards={voyages_cart} />}
 
@@ -102,7 +102,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="w-full mb-24">
-        <div className="w-[90%] mx-auto flex flex-col">
+        <div className="w-[85%] mx-auto flex flex-col">
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
             Optimisez la gestion de vos déplacements
           </h2>
@@ -117,6 +117,14 @@ export default async function Home() {
             />
             <ProfessionalCard titre="Events" image="/team-building.jpg" />
           </div>
+          <Link className="mx-auto" href="/voyages-daffaires">
+            <Button
+              variant="bordered"
+              className="btn  mt-16 border-[#00A9E0]/70 text-[#00A9E0] text-lg rounded"
+            >
+              Voir plus
+            </Button>
+          </Link>
         </div>
       </div>
 
