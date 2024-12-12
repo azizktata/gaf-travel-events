@@ -11,6 +11,7 @@ import VoyageCard from "./voyageCard";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { VOYAGE_ORG_QUERYResult } from "@/sanity/types";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -21,7 +22,11 @@ const urlFor = (source: SanityImageSource) =>
         .format("webp")
         .auto("format")
     : null;
-export default function CarouselCards({ cards }) {
+export default function CarouselCards({
+  cards,
+}: {
+  cards: VOYAGE_ORG_QUERYResult;
+}) {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
@@ -39,15 +44,14 @@ export default function CarouselCards({ cards }) {
             key={index}
           >
             <VoyageCard
-              destination={card.destination}
-              ville={card.ville}
+              destination={card.destination || "tunis"}
               image={
                 card.mainImage
                   ? urlFor(card.mainImage)?.width(550).height(310).url() || ""
                   : ""
               }
-              prix={card.prix}
-              slug={card.slug.current}
+              prix={card.prix || 250}
+              slug={card.slug?.current || "not-found"}
             />
           </CarouselItem>
         ))}

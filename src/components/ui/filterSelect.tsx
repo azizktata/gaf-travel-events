@@ -39,7 +39,7 @@ export default function FilterSelect({
       router.push(pathname + "?" + params.toString());
     }
   }
-  const currentType = searchParams.get("type") || false;
+  const currentType = searchParams.get("type") || "";
 
   return (
     <div className="flex gap-2 items-center">
@@ -48,21 +48,12 @@ export default function FilterSelect({
           <select
             onChange={handleChange}
             name="type"
+            value={currentType}
             className=" border border-gray-300 rounded-md p-2  "
           >
             <option value={0}>tous les voyages</option>
-            <option
-              selected={currentType === "voyage-organise"}
-              value="voyage-organise"
-            >
-              Organisés
-            </option>
-            <option
-              selected={currentType === "voyage-carte"}
-              value="voyage-carte"
-            >
-              A la carte
-            </option>
+            <option value="voyage-organise">Organisés</option>
+            <option value="voyage-carte">A la carte</option>
           </select>
         ) : (
           <select

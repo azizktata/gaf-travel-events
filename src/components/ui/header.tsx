@@ -25,7 +25,7 @@ export default function Header() {
     { label: "Voyages", path: "/voyages" },
     { label: "Hotels", path: "/hotels" },
     { label: "Visa", path: "/visa" },
-    { label: "Voyage d'affaire", path: "/voyage-affaire" },
+    { label: "VIP", path: "/voyage-affaires" },
   ];
   const handleWhatsAppCall = () => {
     const phoneNumber = "19344320976";
@@ -83,7 +83,7 @@ export default function Header() {
         </NavbarItem>
         <NavbarItem>
           <Link className="text-base" href="/voyages-daffaires">
-            voyages d&apos;affaires
+            VIP
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -106,14 +106,15 @@ export default function Header() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className="flex flex-col  gap-8 pt-4">
         {menuItems.map((item, index) => (
           <NavbarMenuItem
             onClick={handleMenuItemClick}
             key={`${item}-${index}`}
+            className="border-b border-gray-300 pb-2 w-auto"
           >
             <Link
-              className="w-full"
+              className="w-auto text-xl"
               color={
                 index === 2
                   ? "primary"

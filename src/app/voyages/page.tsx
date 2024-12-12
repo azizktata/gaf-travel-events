@@ -9,6 +9,7 @@ import {
   fetchDestOfVoyages,
   fetchVoaygesByFilterOpions,
 } from "@/utils/getData";
+import { Hotel, Periode } from "@/types";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -20,25 +21,17 @@ const urlFor = (source: SanityImageSource) =>
         .auto("format")
     : null;
 
-interface SearchParams {
-  type?: string;
-  destination?: string;
-}
 export default async function page({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
-  const typeFilter = searchParams.type || "";
+  const { type = "", destination = "" } = await searchParams;
 
-  const destinationFilter = searchParams.destination || "";
-  const voyages = await fetchVoaygesByFilterOpions(
-    typeFilter,
-    destinationFilter
-  );
-  const destinations = (await fetchDestOfVoyages()).map(
-    (voyage) => voyage.destination
-  );
+  const voyages = await fetchVoaygesByFilterOpions(type, destination);
+  const destinations = (await fetchDestOfVoyages())
+    .map((voyage) => voyage.destination)
+    .filter((destination): destination is string => destination !== null);
 
   return (
     <div className="w-[90%] lg:w-[70%] mx-auto min-h-[100vh]">
@@ -49,25 +42,42 @@ export default async function page({
         <FilterSelect type="voyage" options={destinations} />
       </div>
 
-      <div className=" mx-auto">
+      <div className=" mx-auto mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {voyages.map((voyage, index) => (
-            <VoyageCard2
-              key={index}
-              titre={voyage.destination}
-              image={
-                voyage.mainImage
-                  ? urlFor(voyage.mainImage)?.width(550).height(310).url() || ""
-                  : ""
-              }
-              destination={voyage.destination}
-              duration={voyage.duration}
-              prix={voyage.prix}
-              periodes={voyage.periodes}
-              hotels={voyage.hotels}
-              slug={voyage.slug.current}
-            />
-          ))}
+          {voyages &&
+            voyages.map(
+              (
+                voyage: {
+                  destination: string;
+                  mainImage: SanityImageSource;
+                  duration: string;
+                  prix: string;
+                  periodes: Periode[];
+                  hotels: Hotel[];
+                  slug: { current: string };
+                },
+                index: React.Key | null | undefined
+              ) => (
+                <VoyageCard2
+                  key={index}
+                  titre={voyage.destination}
+                  image={
+                    voyage.mainImage
+                      ? urlFor(voyage.mainImage)
+                          ?.width(550)
+                          .height(310)
+                          .url() || ""
+                      : ""
+                  }
+                  destination={voyage.destination}
+                  duration={voyage.duration}
+                  prix={voyage.prix}
+                  periodes={voyage.periodes}
+                  hotels={voyage.hotels}
+                  slug={voyage.slug.current}
+                />
+              )
+            )}
         </div>
       </div>
     </div>

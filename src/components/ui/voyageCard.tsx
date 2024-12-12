@@ -5,14 +5,14 @@ import { Button } from "@nextui-org/button";
 import Link from "next/link";
 export default function VoyageCard({
   destination,
-  ville,
+
   prix,
   image,
   slug,
 }: {
   destination: string;
-  ville: string;
-  prix: string;
+
+  prix: number;
   image: string;
   slug: string;
 }) {
@@ -22,7 +22,6 @@ export default function VoyageCard({
         <p className=" text-white/80 text-lg uppercase font-bold">
           {destination}
         </p>
-        <h4 className="text-white font-medium text-xl">{ville}</h4>
       </CardHeader>
 
       <Image

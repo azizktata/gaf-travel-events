@@ -5,7 +5,7 @@ import React from "react";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { PortableText } from "next-sanity";
+import { PortableText, PortableTextBlock } from "next-sanity";
 import { fetchVoyageBySlug } from "@/utils/getData";
 import { notFound } from "next/navigation";
 import TarifVoyage from "@/components/ui/tarifVoyage";
@@ -20,14 +20,18 @@ const urlFor = (source: SanityImageSource) =>
         .format("webp")
         .auto("format")
     : null;
-export default async function page({ params }: { params: { slug: string } }) {
-  const voyage = await fetchVoyageBySlug(params);
+export default async function page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const voyage = await fetchVoyageBySlug(await params);
   if (!voyage) {
     notFound();
   }
   const {
     titre,
-    description,
+    description = [] as PortableTextBlock[],
     destination,
     prix,
 
@@ -46,9 +50,11 @@ export default async function page({ params }: { params: { slug: string } }) {
   const mainImageUrl = mainImage
     ? urlFor(mainImage)?.width(550).height(310).url()
     : null;
-  const listImagesUrls = listImage.map((image: any) =>
-    image ? urlFor(image)?.width(550).height(310).url() : null
-  );
+  const listImagesUrls =
+    listImage &&
+    listImage.map((image) =>
+      image ? urlFor(image)?.width(550).height(310).url() : null
+    );
   return (
     <div>
       <div className="w-[90%] lg:w-[60%] mx-auto mt-8 lg:mt-16 min-h-[100vh]">
@@ -113,25 +119,29 @@ export default async function page({ params }: { params: { slug: string } }) {
               />
             </div>
             <div className="columns-2 gap-1 mb-1 md:flex md:flex-col">
-              {listImagesUrls.map((imageUrl: string, index: number) => (
-                <Image
-                  key={index}
-                  src={imageUrl || "https://placehold.co/550x310/png"}
-                  alt="hotel"
-                  width={500}
-                  height={200}
-                  className="object-cover rounded-xs mb-1"
-                />
-              ))}
+              {listImagesUrls &&
+                listImagesUrls.map((imageUrl, index: number) => (
+                  <Image
+                    key={index}
+                    src={imageUrl || "https://placehold.co/550x310/png"}
+                    alt="hotel"
+                    width={500}
+                    height={200}
+                    className="object-cover rounded-xs mb-1"
+                  />
+                ))}
             </div>
           </div>
         </div>
 
         <div className="mt-8 max-w-[74ch]">
           <h2 className="text-gray-800 text-lg font-semibold">Présentation</h2>
-          <p className="text-gray-600 mt-4">
-            {description && <PortableText value={description} />}
-          </p>
+
+          {description && (
+            <div className="text-gray-600 mt-4">
+              <PortableText value={description as PortableTextBlock[]} />
+            </div>
+          )}
         </div>
 
         {sejours && (

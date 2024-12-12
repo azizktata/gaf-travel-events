@@ -1,19 +1,12 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import {
-  Facebook,
-  Instagram,
-  Twitter,
-  MapPin,
-  Phone,
-  Mail,
-} from "lucide-react";
+import { Facebook, Instagram, MapPin, Phone, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-10">
-      <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container w-[85%]  mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* About Section */}
         <div>
           <h4 className="text-lg font-bold mb-4">GAF Travel & Event</h4>
@@ -49,7 +42,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/voyages-daffaires" className="hover:underline">
-                Voyages d&apos;affaires
+                VIP
               </Link>
             </li>
           </ul>
@@ -96,7 +89,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-8 border-t border-gray-700 pt-4 text-center">
+      <div className="mt-8 border-t text-gray-300 border-gray-700 pt-4 text-center">
         <p>© 2024 GAF Travel & Event. Tous droits réservés.</p>
       </div>
     </footer>

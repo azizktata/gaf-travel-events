@@ -20,7 +20,7 @@ export default function page() {
             <div className="max-w-[60ch] mx-auto flex flex-col items-center">
               <h1 className="mb-2  font-medium text-3xl lg:text-5xl  tracking-widest text-white mb-8">
                 {" "}
-                Voyages d'affaires
+                Voyages d&apos;affaires
               </h1>
               <p className="text-sm max-w-[50ch] text-center  text-white/70  font-medium ">
                 excellent partenaire pour beaucoup d’entreprises grâce à des

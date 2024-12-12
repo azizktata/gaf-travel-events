@@ -2,8 +2,9 @@ import React from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
-import { Clock, Hotel, MapPinIcon } from "lucide-react";
+import { Clock, HotelIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
+import { Hotel, Periode } from "@/types";
 
 export default function VoyageCard2({
   titre,
@@ -16,12 +17,12 @@ export default function VoyageCard2({
   slug,
 }: {
   titre: string;
-  hotels: any;
+  hotels: Hotel[];
   destination: string;
   duration: string;
   prix: string;
   image: string;
-  periodes: any;
+  periodes: Periode[];
   slug: string;
 }) {
   return (
@@ -40,7 +41,7 @@ export default function VoyageCard2({
           {hotels &&
             hotels.map((hotel) => (
               <div key={hotel.hotel} className="flex items-center gap-2">
-                <Hotel size={16} />
+                <HotelIcon size={16} />
                 <span className="text-sm text-gray-500">{hotel.hotel}</span>
               </div>
             ))}

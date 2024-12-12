@@ -20,4 +20,9 @@ export interface Periode {
     tarif?: number;
     _key: string;
   }
+export interface Hotel {
+    hotel?: string;
+    prix?: number;
+    _key: string;
+  }
   

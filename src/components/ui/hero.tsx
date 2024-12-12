@@ -4,8 +4,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
@@ -14,6 +12,7 @@ import { Button } from "@nextui-org/button";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { VOYAGE_3_QUERYResult } from "@/sanity/types";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -24,7 +23,7 @@ const urlFor = (source: SanityImageSource) =>
         .format("webp")
         .auto("format")
     : null;
-export default function Hero({ offres }: { offres: any }) {
+export default function Hero({ offres }: { offres: VOYAGE_3_QUERYResult }) {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );

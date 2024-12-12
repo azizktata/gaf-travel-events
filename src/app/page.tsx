@@ -43,17 +43,17 @@ export default async function Home() {
               hotels.map((hotel, index) => (
                 <HotelCard
                   key={index}
-                  nom={hotel.nom}
-                  etoile={hotel.etoile}
+                  nom={hotel.nom || "hotel"}
+                  etoile={hotel.etoile || 1}
                   image={
                     hotel.mainImage
                       ? urlFor(hotel.mainImage)?.width(550).height(310).url() ||
                         ""
                       : ""
                   }
-                  prix={hotel.prix}
-                  addresse={hotel.adresse}
-                  slug={hotel.slug.current}
+                  prix={hotel.prix || 0}
+                  addresse={hotel.adresse || "tunis"}
+                  slug={hotel.slug?.current || "not-found"}
                 />
               ))}
           </div>

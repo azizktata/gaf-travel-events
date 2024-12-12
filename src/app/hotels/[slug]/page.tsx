@@ -42,9 +42,11 @@ export default async function page({
   const hotelImageUrl = mainImage
     ? urlFor(mainImage)?.width(550).height(310).url()
     : null;
-  const listImagesUrls = listImage.map((image) =>
-    image ? urlFor(image)?.width(550).height(310).url() : null
-  );
+  const listImagesUrls =
+    listImage &&
+    listImage.map((image) =>
+      image ? urlFor(image)?.width(550).height(310).url() : null
+    );
   return (
     <div>
       <div className="w-[90%] lg:w-[60%] mx-auto mt-8 lg:mt-16 min-h-[100vh]">
@@ -52,7 +54,7 @@ export default async function page({
         <div>
           <div className="flex  items-center gap-2 mt-8">
             <h1 className="text-2xl  text-gray-800  ">{nom}</h1>
-            <span className="text-sm">{"⭐".repeat(etoile)}</span>
+            <span className="text-sm">{"⭐".repeat(etoile || 0)}</span>
           </div>
           <div className="flex justify-between items-center">
             <div className="md:flex gap-4">
@@ -89,16 +91,17 @@ export default async function page({
               />
             </div>
             <div className="columns-2 gap-1 mb-1 md:flex md:flex-col">
-              {listImagesUrls.map((imageUrl, index) => (
-                <Image
-                  key={index}
-                  src={imageUrl || "https://placehold.co/550x310/png"}
-                  alt="hotel"
-                  width={500}
-                  height={200}
-                  className="object-cover rounded-xs"
-                />
-              ))}
+              {listImagesUrls &&
+                listImagesUrls.map((imageUrl, index) => (
+                  <Image
+                    key={index}
+                    src={imageUrl || "https://placehold.co/550x310/png"}
+                    alt="hotel"
+                    width={500}
+                    height={200}
+                    className="object-cover rounded-xs"
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -110,7 +113,7 @@ export default async function page({
           {description && <PortableText value={description} />}
         </div>
         <div className="mt-8 ">
-          <Tarifs destination={nom} />
+          <Tarifs destination={nom || ""} />
         </div>
 
         {emplacement && (
@@ -125,8 +128,6 @@ export default async function page({
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="dolphin equipements map"
-              aria-placeholder="Angle Rue d’egypte Rue d’espagne 2013, Ben arus Tunis"
             ></iframe>
           </div>
         )}

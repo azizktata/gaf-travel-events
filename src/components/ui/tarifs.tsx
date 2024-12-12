@@ -49,14 +49,14 @@ export default function Tarifs({ destination }: { destination: string }) {
     ]);
   };
 
-  const handleUpdateChambre = (id, key, value) => {
+  const handleUpdateChambre = (id: number, key: string, value: unknown) => {
     setChambres((prev) =>
       prev.map((chambre) =>
         chambre.id === id ? { ...chambre, [key]: value } : chambre
       )
     );
   };
-  const handleRemoveChambre = (id) => {
+  const handleRemoveChambre = (id: number) => {
     setChambres((prev) => prev.filter((chambre) => chambre.id !== id));
   };
 
@@ -133,7 +133,9 @@ export default function Tarifs({ destination }: { destination: string }) {
               selectedKeys={selectedPensionKeys}
               selectionMode="single"
               variant="flat"
-              onSelectionChange={setSelectedPensionKeys}
+              onSelectionChange={(keys) =>
+                setSelectedPensionKeys(keys as Set<string>)
+              }
             >
               <DropdownItem key="Demi-pension">Demi-pension</DropdownItem>
               <DropdownItem key="Pension Compléte">
@@ -323,7 +325,7 @@ export default function Tarifs({ destination }: { destination: string }) {
           </>
         </CardBody>
         <CardFooter className="justify-end">
-          <Button color="primary" onPress={() => console.log(formData)}>
+          <Button color="primary" onPress={() => setShow((prev) => !prev)}>
             Réserver
           </Button>
         </CardFooter>

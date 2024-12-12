@@ -10,6 +10,9 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/live";
 
+
+
+
     const VOYAGE_ORG_QUERY = defineQuery(`*[
       _type == "post" && type == "voyage-organise"
       ]`);
@@ -77,7 +80,7 @@ import { sanityFetch } from "@/sanity/live";
         const { data } = await sanityFetch({ query: HOTEL_QUERY });
         return data;
       }
-      export async function fetchHotelBySlug(params) {
+      export async function fetchHotelBySlug(params: { slug: string; }) {
         if (!params || !params.slug) {
             throw new Error("Missing 'slug' parameter");
           }
@@ -104,7 +107,7 @@ import { sanityFetch } from "@/sanity/live";
         return data;
       }
 
-      export async function fetchVoyageBySlug(params) {
+      export async function fetchVoyageBySlug(params: { slug: string; }) {
         if (!params || !params.slug) {
             throw new Error("Missing 'slug' parameter");
           }

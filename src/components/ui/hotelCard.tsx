@@ -16,7 +16,7 @@ export default function HotelCard({
   nom: string;
   etoile: number;
   image: string;
-  prix: string;
+  prix: number;
   addresse: string;
   slug: string;
 }) {
@@ -38,7 +38,7 @@ export default function HotelCard({
           <span className="text-xs">{"⭐".repeat(etoile)}</span>
         </div>
         <p className="text-xs text-[#00A9E0] mt-2">
-          Hotel lux - Pieds dans l'eau - Hotel d'affarie
+          Hotel lux - Pieds dans l&apos;eau - Hotel d&apos;affarie
         </p>
       </CardBody>
       <CardFooter className="flex justify-between items-center border-t  py-4">
