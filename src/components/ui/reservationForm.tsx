@@ -28,6 +28,7 @@ const formSchema = z.object({
   Télephone: z.string().min(2, {
     message: "entrez un sujet valide.",
   }),
+  message: z.string(),
 });
 export default function ReservationForm({
   hotelForm,
@@ -46,6 +47,7 @@ export default function ReservationForm({
       Télephone: "",
       prénom: "",
       adultes: "",
+      message: "",
     },
   });
   const isLoading = form.formState.isSubmitting;
@@ -76,7 +78,7 @@ export default function ReservationForm({
   };
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const hotelFormText = hotelForm ? generateHotelFormText(hotelForm) : "";
-    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prénom} \nAdultes: ${values.adultes} \nEmail: ${values.email}\n Télephone: ${values.Télephone}`;
+    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prénom} \nAdultes: ${values.adultes} \nEmail: ${values.email}\n Télephone: ${values.Télephone}\n Message: ${values.message}`;
     const voyageFormText = voyageForm ? `Voyage: ${voyageForm}` : "";
     const res = await sendEmail({
       text: hotelForm
@@ -98,7 +100,7 @@ export default function ReservationForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col md:grid md:grid-cols-2 md:gap-2 bg-gray-100 p-4"
+        className="flex flex-col md:grid md:grid-cols-2 md:gap-2 bg-gray-100 p-4 rounded-xl shadow-lg mb-8"
       >
         <h2 className="text-gray-800 text-lg font-semibold col-span-full mb-8 ">
           Formulaire de Réservation
@@ -169,6 +171,23 @@ export default function ReservationForm({
               <FormLabel>Télephone</FormLabel>
               <FormControl>
                 <Input className="bg-white" {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Message</FormLabel>
+              <FormControl>
+                <textarea
+                  {...field}
+                  className="resize-none border border-gray-300 rounded-md p-2 w-full h-32"
+                />
               </FormControl>
 
               <FormMessage />
