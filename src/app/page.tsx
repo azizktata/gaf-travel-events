@@ -115,7 +115,7 @@ export default async function Home() {
               titre="Team Building"
               image="/team-building.jpg"
             />
-            <ProfessionalCard titre="Events" image="/team-building.jpg" />
+            <ProfessionalCard titre="Events" image="/event-3.jpg" />
           </div>
           <Link className="mx-auto" href="/voyages-daffaires">
             <Button

@@ -181,7 +181,7 @@ export default function ReservationForm({
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="col-span-full">
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <textarea
