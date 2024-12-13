@@ -25,12 +25,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { client } from "@/sanity/client";
 
 const formSchema = z.object({
   nom: z.string().min(2, { message: "entrez votre nom." }),
-  prénom: z.string().min(2, { message: "entrez votre prénom." }),
+  prenom: z.string().min(2, { message: "entrez votre prénom." }),
   email: z.string().email({ message: "entrez un email valide." }),
-  Télephone: z.string().min(2, {
+  Telephone: z.string().min(2, {
     message: "entrez un sujet valide.",
   }),
   Country: z.string({ message: "entrez le pays." }),
@@ -44,9 +45,9 @@ export default function VisaForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       nom: "",
-      prénom: "",
+      prenom: "",
       email: "",
-      Télephone: "",
+      Telephone: "",
       Country: "",
       Visa: "",
       Passport: undefined,
@@ -55,7 +56,26 @@ export default function VisaForm() {
   const isLoading = form.formState.isSubmitting;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prénom} \nEmail: ${values.email}\n Télephone: ${values.Télephone}`;
+    let imageAsset;
+    if (values.Passport) {
+      imageAsset = await client.assets.upload("image", values.Passport);
+    } else {
+      throw new Error("Passport file is required.");
+    }
+    await client.create({
+      _type: "visa",
+      ...values,
+      destination: values.Country,
+      type: values.Visa,
+      passport: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: imageAsset._id,
+        },
+      },
+    });
+    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prenom} \nEmail: ${values.email}\n Télephone: ${values.Telephone}`;
     const res = await sendEmail({
       text: mailText,
       sujet: "Nouveau message de demande de visa",
@@ -72,7 +92,7 @@ export default function VisaForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className=" flex flex-col md:grid md:grid-cols-2 md:gap-2 bg-gray-100 p-4"
+        className=" flex flex-col md:grid md:grid-cols-2 gap-3 bg-gray-100 p-4"
       >
         <h2 className="text-gray-800 text-lg font-semibold col-span-full mb-8 ">
           Formulaire de Demande de Visa
@@ -93,7 +113,7 @@ export default function VisaForm() {
         />
         <FormField
           control={form.control}
-          name="prénom"
+          name="prenom"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Votre prénom</FormLabel>
@@ -122,7 +142,7 @@ export default function VisaForm() {
         />
         <FormField
           control={form.control}
-          name="Télephone"
+          name="Telephone"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Télephone</FormLabel>

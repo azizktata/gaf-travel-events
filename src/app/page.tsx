@@ -84,7 +84,7 @@ export default async function Home() {
           </Link>
         </div>
       </div>
-      <div className="w-full mb-24">
+      <div className="w-full bg-[#dfeaf3] py-16 mb-24">
         <div className="w-[85%] mx-auto flex flex-col">
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
             Voyages à la Carte
@@ -107,10 +107,7 @@ export default async function Home() {
             Optimisez la gestion de vos déplacements
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <ProfessionalCard
-              titre="Véhicule avec chauffeur"
-              image="/vip.jpg"
-            />
+            <ProfessionalCard titre="VIP" image="/vip.jpg" />
             <ProfessionalCard
               titre="Team Building"
               image="/team-building.jpg"
@@ -132,7 +129,7 @@ export default async function Home() {
         <h2 className="text-2xl font-bold text-center my-8 mb-16 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
           Contactez nous
         </h2>
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto px-4">
           <ContactForm />
         </div>
       </div>

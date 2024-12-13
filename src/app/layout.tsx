@@ -12,8 +12,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Gaf travel & events",
-  description: "Gaf travel & events",
+  title: "GAF Voyages",
+  description: "GAF Voyages",
 };
 
 export default function RootLayout({

@@ -42,8 +42,8 @@ export default function FilterSelect({
   const currentType = searchParams.get("type") || "";
 
   return (
-    <div className="flex gap-2 items-center">
-      <div className="flex gap-4">
+    <div className="flex  gap-2 items-center">
+      <div className="flex flex-wrap gap-4">
         {type === "voyage" ? (
           <select
             onChange={handleChange}

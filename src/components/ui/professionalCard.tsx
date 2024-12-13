@@ -22,7 +22,7 @@ export default function ProfessionalCard({
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-linear"></div>
 
         <CardBody className="absolute inset-0 mb-16 z-10 flex flex-col items-center justify-center transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 opacity-0 translate-y-5">
-          <h1 className="mb-2 text-center font-medium text-xl sm:text-2xl lg:text-4xl tracking-widest text-white">
+          <h1 className="mb-2 text-center font-medium text-2xl lg:text-4xl tracking-widest text-white">
             {titre}
           </h1>
           <Link href={"/voyages-daffaires"}>

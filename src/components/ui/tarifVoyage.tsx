@@ -30,7 +30,6 @@ export default function TarifVoyage({
     });
   };
   const [show, setShow] = React.useState(false);
-  const isDisplayed = show ? { display: "block" } : { display: "none" };
   return (
     <div>
       {periodes && (
@@ -67,13 +66,13 @@ export default function TarifVoyage({
               color="primary"
               onClick={() => setShow((prev) => !prev)}
             >
-              reserver
+              Reserver
             </Button>
           </div>
         </div>
       )}
       {show && (
-        <div style={isDisplayed} className="form-main">
+        <div className="form-main">
           <ReservationForm destination={destination} />
         </div>
       )}

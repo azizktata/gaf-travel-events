@@ -100,7 +100,7 @@ export default function ReservationForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col md:grid md:grid-cols-2 md:gap-2 bg-gray-100 p-4 rounded-xl shadow-lg mb-8"
+        className="flex flex-col md:grid md:grid-cols-2 gap-3 bg-gray-100 p-4 rounded-xl shadow-lg mb-8"
       >
         <h2 className="text-gray-800 text-lg font-semibold col-span-full mb-8 ">
           Formulaire de Réservation

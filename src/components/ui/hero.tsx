@@ -30,7 +30,7 @@ export default function Hero({ offres }: { offres: VOYAGE_3_QUERYResult }) {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full  m-auto"
+      className="w-full  m-auto "
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -38,7 +38,7 @@ export default function Hero({ offres }: { offres: VOYAGE_3_QUERYResult }) {
         {offres.map((offre, index) => (
           <CarouselItem key={index}>
             <div>
-              <Card className="relative w-full h-[600px]  overflow-hidden shadow-xl bg-gray-800">
+              <Card className="relative w-full h-[600px] rounded-none overflow-hidden shadow-xl bg-gray-800">
                 {/* Price Header */}
                 <CardHeader className="absolute z-10 left-0 right-0 flex justify-center mt-32 flex flex-col mx-auto max-w-xs bg-white/90 rounded-xs px-4 py-2">
                   <p className="text-[#005bc4] font-semibold">
@@ -59,6 +59,7 @@ export default function Hero({ offres }: { offres: VOYAGE_3_QUERYResult }) {
                           .url() || ""
                       : ""
                   }
+                  radius="none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-linear"></div>
 

@@ -21,16 +21,18 @@ export default function HotelCard({
   slug: string;
 }) {
   return (
-    <Card className="pb-4 ">
-      <CardHeader className="overflow-hidden w-full  p-0 ">
+    <Card className="pb-4 rounded-none">
+      <CardHeader className="overflow-visible w-full   p-0 ">
         <Image
           isZoomed
           alt="Card background"
           className="object-cover w-full h-full "
           src={image}
+          removeWrapper
+          radius="none"
         />
       </CardHeader>
-      <CardBody className="pb-8 pt-2 px-4 flex-col items-start gap-2">
+      <CardBody className="py-8 px-4 flex-col items-start gap-2">
         <h3 className="text-xl text-black">{nom}</h3>
         <div className="flex items-center gap-2">
           <MapIcon size={16} />

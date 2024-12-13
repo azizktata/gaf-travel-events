@@ -23,7 +23,7 @@ export default function page() {
                 Qui sommes nous?
               </h1>
               <p className="text-lg  text-white/70 tracking-widest font-medium ">
-                GAF Travel & Events
+                GAF Voyages
               </p>
             </div>
           </CardBody>
@@ -36,8 +36,8 @@ export default function page() {
               Qui sommes nous?
             </h3>
             <p className="max-w-[70ch] text-lg text-gray-700 font-light">
-              Bienvenue chez GAF Travel & Events, où commencent vos voyages
-              inoubliables !<span className="block mt-2"></span>
+              Bienvenue chez GAF Voyages, où commencent vos voyages inoubliables
+              !<span className="block mt-2"></span>
               Basée en Tunisie, notre agence met son expertise et sa passion à
               votre service pour créer des expériences uniques. Que vous rêviez
               de destinations exotiques, d&apos;aventures sur mesure, ou de
@@ -51,9 +51,9 @@ export default function page() {
               Notre mission
             </h3>
             <p className="max-w-[60ch] text-lg text-gray-700 font-light">
-              Chez GAF Travel & Events, notre mission est de fournir des
-              services de voyage et d&apos;organisation d&apos;événements
-              d&apos;exception, en alliant créativité et professionnalisme.
+              Chez GAF Voyages, notre mission est de fournir des services de
+              voyage et d&apos;organisation d&apos;événements d&apos;exception,
+              en alliant créativité et professionnalisme.
               <span className="block mt-2"></span>
               Nous sommes passionnés par la mise en valeur du riche patrimoine
               tunisien tout en offrant des solutions personnalisées pour
@@ -94,7 +94,7 @@ export default function page() {
           <div className="mb-12 lg:mb-16 ">
             <h3 className="text-2xl font-medium text-gray-800 lg:text-3xl mb-4  after:content-[''] after:block after:w-1/4 after:h-[1px] after:bg-[#30085E] after:mt-2 after:rounded-md after:scale-x-100 after:origin-left">
               {" "}
-              Pourquoi choisir GAF Travel & Events ?
+              Pourquoi choisir GAF Voyages ?
             </h3>
             <ul className="max-w-[70ch] text-lg text-gray-700 font-light space-y-4 leading-relaxed mb-6">
               <li>
@@ -127,9 +127,7 @@ export default function page() {
             </ul>
             <p className="text-lg max-w-[70ch] text-gray-700 font-light leading-relaxed">
               Avec{" "}
-              <span className="font-semibold text-gray-700">
-                GAF Travel & Events
-              </span>
+              <span className="font-semibold text-gray-700">GAF Voyages</span>
               ,partez à la découverte du monde et créez des souvenirs
               inoubliables. Faites-nous confiance pour transformer vos idées en
               voyages extraordinaires.

@@ -60,8 +60,17 @@ export default async function page({
       <div className="w-[90%] lg:w-[60%] mx-auto mt-8 lg:mt-16 min-h-[100vh]">
         <BreadCrumbs BreadcrumbItems={["voyages", `${titre}`]} />
         <div>
-          <div className="flex items-center gap-2 mt-8">
+          <div className="flex justify-between items-center gap-2 mt-8">
             <h1 className="text-3xl  text-black mt-4 ">{titre}</h1>
+            <div className="md:flex gap-4">
+              <p className="text-sm text-gray-600 flex flex-col  gap-2 mt-4">
+                {" "}
+                <span>a partir de </span>
+                <span className="font-semibold text-xl text-black">
+                  {prix} TND
+                </span>{" "}
+              </p>
+            </div>
           </div>
 
           <div className="flex items-center justify-between">
@@ -76,7 +85,7 @@ export default async function page({
                 <Clock size={16} />
                 {duration}{" "}
               </p>
-              <div className="text-sm text-gray-600 flex gap-2 mt-4 flex items-center">
+              <div className="text-sm text-gray-600 flex gap-2 mt-4 flex items-center mb-6">
                 {" "}
                 {hotels &&
                   hotels.map((hotel) => (
@@ -88,15 +97,6 @@ export default async function page({
                     </div>
                   ))}
               </div>
-            </div>
-            <div className="md:flex gap-4">
-              <p className="text-sm text-gray-600 flex flex-col  gap-2 mt-4">
-                {" "}
-                <span>a partir de </span>
-                <span className="font-semibold text-xl text-black">
-                  {prix} TND
-                </span>{" "}
-              </p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -206,9 +206,8 @@ export default async function page({
         {hotels && (
           <div className="mt-8 max-w-[74ch]">
             <h2 className="text-gray-800 text-lg font-semibold mb-2">Hôtels</h2>
-
             {hotels.map((hotel) => (
-              <p className="flex items-center gap-2" key={hotel._key}>
+              <p className="flex flex-wrap items-center gap-2" key={hotel._key}>
                 <Hotel style={{ width: "18px", height: "18px" }} />
                 {hotel.hotel} : a partir de{" "}
                 <span className="font-semibold text-black">

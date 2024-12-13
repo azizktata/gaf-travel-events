@@ -18,6 +18,7 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Phone } from "lucide-react";
+import { Image } from "@nextui-org/image";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -25,7 +26,10 @@ export default function Header() {
     { label: "Voyages", path: "/voyages" },
     { label: "Hotels", path: "/hotels" },
     { label: "Visa", path: "/visa" },
-    { label: "VIP", path: "/voyage-affaires" },
+    { label: "VIP", path: "/voyages-daffaires" },
+    { label: "Qui somme-nous", path: "/qui-sommes-nous" },
+    { label: "Facebook", path: "/" },
+    { label: "Instagram", path: "/" },
   ];
   const handleWhatsAppCall = () => {
     const phoneNumber = "19344320976";
@@ -44,7 +48,7 @@ export default function Header() {
         />
         <NavbarBrand>
           <Link href={"/"} className="font-bold text-inherit">
-            GAF
+            <Image src="/GAF.png" alt="logo" width={115} height={115} />
           </Link>
         </NavbarBrand>
       </NavbarContent>
