@@ -120,6 +120,16 @@ export default function Tarifs({ destination }: { destination: string }) {
                   )
                 : "--"}
             </p>
+            {chambres &&
+              chambres.map((chambre) => (
+                <p key={chambre.id} className="text-default-500 text-sm">
+                  {" "}
+                  Chambre {chambre.id} :{" "}
+                  {Array.from(chambre.selectedAdultsKeys).join(", ")}{" "}
+                  {Array.from(chambre.selectedEnfantsKeys).join(", ")}{" "}
+                  {Array.from(chambre.selectedLitBebeKeys).join(", ")}
+                </p>
+              ))}
           </div>
           <Dropdown>
             <DropdownTrigger>
@@ -148,6 +158,7 @@ export default function Tarifs({ destination }: { destination: string }) {
               {" "}
               <Users size={16} /> Chambres & occupations
             </Button>
+
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
               <ModalContent>
                 {(onClose) => (

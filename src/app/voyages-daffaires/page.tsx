@@ -70,7 +70,7 @@ export default function page() {
                 </h2>
                 <p className="mb-5 text-lg text-gray-800 font-light">
                   Puisez l’inspiration dans nos suggestions avant de créer le
-                  voyage qui vous ressemble. GAF travel & events vous propose
+                  voyage qui vous ressemble. GAF Voyages vous propose
                   aujourd’hui un nouveau regard sur les déplacements
                   professionnels d’entreprise de vos collaborateurs.
                 </p>
@@ -90,7 +90,7 @@ export default function page() {
                 </h2>
                 <p className="mb-5 text-lg text-gray-800 font-light">
                   Puisez l’inspiration dans nos suggestions avant de créer le
-                  voyage qui vous ressemble. GAF travel & events vous propose
+                  voyage qui vous ressemble. GAF Voyages vous propose
                   aujourd’hui un nouveau regard sur les déplacements
                   professionnels d’entreprise de vos collaborateurs.
                 </p>

@@ -84,7 +84,7 @@ export default async function page() {
           </div>
           <div className="mb-12  lg:mb-16">
             <h3 className="text-2xl font-medium text-gray-800 lg:text-3xl mb-4   after:content-[''] after:block after:w-1/4 after:h-[1px] after:bg-[#30085E] after:mt-2 after:rounded-md after:scale-x-100 after:origin-left">
-              Simplifiez vos démarches avec GAF Travel & Events
+              Simplifiez vos démarches avec GAF Voyages
             </h3>
             <p className="max-w-[70ch] text-lg text-gray-700 font-light">
               Faites-nous confiance pour un accompagnement professionnel et

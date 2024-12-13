@@ -52,9 +52,20 @@ export default async function page({
       <div className="w-[90%] lg:w-[60%] mx-auto mt-8 lg:mt-16 min-h-[100vh]">
         <BreadCrumbs BreadcrumbItems={["hotels", `${nom}`]} />
         <div>
-          <div className="flex  items-center gap-2 mt-8">
-            <h1 className="text-2xl  text-gray-800  ">{nom}</h1>
-            <span className="text-sm">{"⭐".repeat(etoile || 0)}</span>
+          <div className="flex justify-between items-center gap-2 mt-8">
+            <div className="flex gap-2 items-center">
+              <h1 className="text-2xl  text-gray-800  ">{nom}</h1>
+              <span className="text-sm">{"⭐".repeat(etoile || 0)}</span>
+            </div>
+            <div className="sm:flex gap-4">
+              <p className="text-sm text-gray-600 flex flex-col  gap-2 mt-4">
+                {" "}
+                <span>a partir de </span>
+                <span className="font-semibold text-xl text-black">
+                  {prix} TND
+                </span>{" "}
+              </p>
+            </div>
           </div>
           <div className="flex justify-between items-center">
             <div className="md:flex gap-4">
@@ -67,15 +78,6 @@ export default async function page({
                 {" "}
                 <LucideCircleDollarSign size={16} /> a partir de{" "}
                 <span className="font-semibold text-black">{prix} TND</span>{" "}
-              </p>
-            </div>
-            <div className="sm:flex gap-4">
-              <p className="text-sm text-gray-600 flex flex-col  gap-2 mt-4">
-                {" "}
-                <span>a partir de </span>
-                <span className="font-semibold text-xl text-black">
-                  {prix} TND
-                </span>{" "}
               </p>
             </div>
           </div>

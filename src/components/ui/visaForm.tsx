@@ -31,12 +31,12 @@ const formSchema = z.object({
   nom: z.string().min(2, { message: "entrez votre nom." }),
   prenom: z.string().min(2, { message: "entrez votre prénom." }),
   email: z.string().email({ message: "entrez un email valide." }),
-  Telephone: z.string().min(2, {
+  telephone: z.string().min(2, {
     message: "entrez un sujet valide.",
   }),
-  Country: z.string({ message: "entrez le pays." }),
-  Visa: z.string({ message: "entrez le type de visa." }),
-  Passport: z.any().refine((file) => file instanceof File, {
+  destination: z.string({ message: "entrez le pays." }),
+  visa: z.string({ message: "entrez le type de visa." }),
+  passport: z.any().refine((file) => file instanceof File, {
     message: "Veuillez télécharger un fichier valide.",
   }),
 });
@@ -47,26 +47,25 @@ export default function VisaForm() {
       nom: "",
       prenom: "",
       email: "",
-      Telephone: "",
-      Country: "",
-      Visa: "",
-      Passport: undefined,
+      telephone: "",
+      destination: "",
+      visa: "",
+      passport: undefined,
     },
   });
   const isLoading = form.formState.isSubmitting;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     let imageAsset;
-    if (values.Passport) {
-      imageAsset = await client.assets.upload("image", values.Passport);
+    if (values.passport) {
+      imageAsset = await client.assets.upload("image", values.passport);
     } else {
-      throw new Error("Passport file is required.");
+      throw new Error("passport file is required.");
     }
     await client.create({
       _type: "visa",
       ...values,
-      destination: values.Country,
-      type: values.Visa,
+
       passport: {
         _type: "image",
         asset: {
@@ -75,7 +74,7 @@ export default function VisaForm() {
         },
       },
     });
-    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prenom} \nEmail: ${values.email}\n Télephone: ${values.Telephone}`;
+    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prenom} \nEmail: ${values.email}\n Télephone: ${values.telephone}`;
     const res = await sendEmail({
       text: mailText,
       sujet: "Nouveau message de demande de visa",
@@ -142,7 +141,7 @@ export default function VisaForm() {
         />
         <FormField
           control={form.control}
-          name="Telephone"
+          name="telephone"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Télephone</FormLabel>
@@ -157,7 +156,7 @@ export default function VisaForm() {
 
         <FormField
           control={form.control}
-          name="Country"
+          name="destination"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Pays</FormLabel>
@@ -186,7 +185,7 @@ export default function VisaForm() {
         />
         <FormField
           control={form.control}
-          name="Visa"
+          name="visa"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Type de visa</FormLabel>
@@ -221,7 +220,7 @@ export default function VisaForm() {
 
         <FormField
           control={form.control}
-          name="Passport"
+          name="passport"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Photo de passport</FormLabel>
