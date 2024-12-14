@@ -62,10 +62,9 @@ export default function VisaForm() {
     } else {
       throw new Error("passport file is required.");
     }
-    await client.create({
+    const createPromise = client.create({
       _type: "visa",
       ...values,
-
       passport: {
         _type: "image",
         asset: {
@@ -74,13 +73,15 @@ export default function VisaForm() {
         },
       },
     });
-    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prenom} \nEmail: ${values.email}\n Télephone: ${values.telephone}`;
-    const res = await sendEmail({
+
+    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prenom} \nEmail: ${values.email}\n Télephone: ${values.telephone}\n visa: ${values.visa}`;
+    const emailPromise = sendEmail({
       text: mailText,
       sujet: "Nouveau message de demande de visa",
       email: values.email,
     });
-    if (res?.success) {
+    const [ress, res] = await Promise.all([createPromise, emailPromise]);
+    if (res?.success && ress) {
       toast.success("Votre message a été envoyé avec succès.");
       form.reset();
     } else {

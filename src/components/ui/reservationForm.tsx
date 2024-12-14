@@ -19,13 +19,14 @@ import { Send } from "lucide-react";
 import { sendEmail } from "@/utils/email";
 import { toast } from "sonner";
 import { HotelFormData } from "@/types";
+import { client } from "@/sanity/client";
 
 const formSchema = z.object({
   nom: z.string().min(2, { message: "entrez votre nom." }),
-  prénom: z.string().min(2, { message: "entrez votre prénom." }),
+  prenom: z.string().min(2, { message: "entrez votre prénom." }),
   adultes: z.string().min(2, { message: "entrez les noms des adultes." }),
   email: z.string().email({ message: "entrez un email valide." }),
-  Télephone: z.string().min(2, {
+  telephone: z.string().min(2, {
     message: "entrez un sujet valide.",
   }),
   message: z.string(),
@@ -44,8 +45,8 @@ export default function ReservationForm({
     defaultValues: {
       nom: "",
       email: "",
-      Télephone: "",
-      prénom: "",
+      telephone: "",
+      prenom: "",
       adultes: "",
       message: "",
     },
@@ -77,10 +78,16 @@ export default function ReservationForm({
     return `${dateRangeText}\n${pensionText}\n${chambresText}`;
   };
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const createPromise = client.create({
+      _type: "reservations",
+      ...values,
+      destination: destination,
+    });
+
     const hotelFormText = hotelForm ? generateHotelFormText(hotelForm) : "";
-    const mailText = `Nom: ${values.nom} \nPrénom: ${values.prénom} \nAdultes: ${values.adultes} \nEmail: ${values.email}\n Télephone: ${values.Télephone}\n Message: ${values.message}`;
+    const mailText = `Nom: ${values.nom} \n Prénom: ${values.prenom} \nAdultes: ${values.adultes} \nEmail: ${values.email}\n telephone: ${values.telephone}\n Message: ${values.message}`;
     const voyageFormText = voyageForm ? `Voyage: ${voyageForm}` : "";
-    const res = await sendEmail({
+    const emailPromise = sendEmail({
       text: hotelForm
         ? `${mailText}\n\n${hotelFormText}`
         : `${mailText}\n\n${voyageFormText}`,
@@ -89,7 +96,10 @@ export default function ReservationForm({
         : `Nouveau message de réservation Voyage ${destination}`,
       email: values.email,
     });
-    if (res?.success) {
+
+    const [ress, res] = await Promise.all([createPromise, emailPromise]);
+
+    if (res?.success && ress) {
       toast.success("Votre message a été envoyé avec succès.");
       form.reset();
     } else {
@@ -102,9 +112,12 @@ export default function ReservationForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col md:grid md:grid-cols-2 gap-3 bg-gray-100 p-4 rounded-xl shadow-lg mb-8"
       >
-        <h2 className="text-gray-800 text-lg font-semibold col-span-full mb-8 ">
+        <h2 className="text-gray-800 text-lg font-semibold col-span-full  ">
           Formulaire de Réservation
         </h2>
+        <p className="text-gray-600 text-sm col-span-full mb-8">
+          nous allons vous contacter pour confirmer votre réservation.
+        </p>
         <FormField
           control={form.control}
           name="nom"
@@ -121,7 +134,7 @@ export default function ReservationForm({
         />
         <FormField
           control={form.control}
-          name="prénom"
+          name="prenom"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Votre prénom</FormLabel>
@@ -165,7 +178,7 @@ export default function ReservationForm({
         />
         <FormField
           control={form.control}
-          name="Télephone"
+          name="telephone"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Télephone</FormLabel>
@@ -185,6 +198,7 @@ export default function ReservationForm({
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <textarea
+                  placeholder="Entrez votre choix de tarifs, dates et autres informations ici"
                   {...field}
                   className="resize-none border border-gray-300 rounded-md p-2 w-full h-32"
                 />

@@ -115,7 +115,7 @@ export default async function page({
           {description && <PortableText value={description} />}
         </div>
         <div className="mt-8 ">
-          <Tarifs destination={nom || ""} />
+          <Tarifs destination={nom || ""} prix={prix || 50} />
         </div>
 
         {emplacement && (

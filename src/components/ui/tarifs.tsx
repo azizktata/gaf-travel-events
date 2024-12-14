@@ -24,9 +24,18 @@ import { parseDate, getLocalTimeZone } from "@internationalized/date";
 import { useDateFormatter } from "@react-aria/i18n";
 import { HotelFormData } from "@/types";
 
-export default function Tarifs({ destination }: { destination: string }) {
+export default function Tarifs({
+  destination,
+  prix,
+}: {
+  destination: string;
+  prix: number;
+}) {
   const [show, setShow] = React.useState(true);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const nightlyRatePerChambre = prix; // 90 TND per chambre per night
+
+  const [totalPrice, setTotalPrice] = React.useState(nightlyRatePerChambre);
 
   const [chambres, setChambres] = React.useState([
     {
@@ -80,6 +89,11 @@ export default function Tarifs({ destination }: { destination: string }) {
 
   // Update aggregated data whenever individual states change
   React.useEffect(() => {
+    const pensionPrices = {
+      "petit déjeuner": 10,
+      "Demi-pension": 20,
+      "Pension Compléte": 30,
+    };
     setFormData({
       chambres: chambres.map((chambre) => ({
         id: chambre.id,
@@ -93,7 +107,21 @@ export default function Tarifs({ destination }: { destination: string }) {
         end: value.end.toString(),
       },
     });
-  }, [chambres, selectedPensionKeys, value]);
+    const nights =
+      (value.end.toDate(getLocalTimeZone()).getTime() -
+        value.start.toDate(getLocalTimeZone()).getTime()) /
+      (1000 * 60 * 60 * 24);
+
+    const chambreCost = chambres.length * nightlyRatePerChambre * nights;
+
+    const selectedPensionKey = Array.from(selectedPensionKeys).join(
+      ", "
+    ) as keyof typeof pensionPrices;
+    const pensionCost =
+      (pensionPrices[selectedPensionKey] || 0) * chambres.length;
+
+    setTotalPrice(chambreCost + pensionCost);
+  }, [chambres, selectedPensionKeys, value, nightlyRatePerChambre]);
   return (
     <div className="">
       <Card className="rounded-sm p-2">
@@ -111,8 +139,8 @@ export default function Tarifs({ destination }: { destination: string }) {
               value={value}
               onChange={setValue}
             />
-            <p className="text-default-500 text-sm">
-              Selected date:{" "}
+            <p className="text-default-500 text-xs">
+              Date sélecionné:{" "}
               {value
                 ? formatter.formatRange(
                     value.start.toDate(getLocalTimeZone()),
@@ -122,7 +150,7 @@ export default function Tarifs({ destination }: { destination: string }) {
             </p>
             {chambres &&
               chambres.map((chambre) => (
-                <p key={chambre.id} className="text-default-500 text-sm">
+                <p key={chambre.id} className="text-default-500 text-xs">
                   {" "}
                   Chambre {chambre.id} :{" "}
                   {Array.from(chambre.selectedAdultsKeys).join(", ")}{" "}
@@ -130,6 +158,9 @@ export default function Tarifs({ destination }: { destination: string }) {
                   {Array.from(chambre.selectedLitBebeKeys).join(", ")}
                 </p>
               ))}
+            <p className="text-default-500 text-xs">
+              Prix total: approximation de {totalPrice} TND
+            </p>
           </div>
           <Dropdown>
             <DropdownTrigger>
@@ -147,14 +178,15 @@ export default function Tarifs({ destination }: { destination: string }) {
                 setSelectedPensionKeys(keys as Set<string>)
               }
             >
+              <DropdownItem key="petit déjeuner">Petit déjeuner</DropdownItem>
               <DropdownItem key="Demi-pension">Demi-pension</DropdownItem>
               <DropdownItem key="Pension Compléte">
                 Pension Compléte
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
-          <>
-            <Button onPress={onOpen}>
+          <div>
+            <Button className="w-full" onPress={onOpen}>
               {" "}
               <Users size={16} /> Chambres & occupations
             </Button>
@@ -162,7 +194,7 @@ export default function Tarifs({ destination }: { destination: string }) {
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
               <ModalContent>
                 {(onClose) => (
-                  <>
+                  <div>
                     <ModalHeader className="flex flex-col gap-1">
                       Sélection des chambres et des passagers
                     </ModalHeader>
@@ -329,11 +361,11 @@ export default function Tarifs({ destination }: { destination: string }) {
                         Valider
                       </Button>
                     </ModalFooter>
-                  </>
+                  </div>
                 )}
               </ModalContent>
             </Modal>
-          </>
+          </div>
         </CardBody>
         <CardFooter className="justify-end">
           <Button color="primary" onPress={() => setShow((prev) => !prev)}>
