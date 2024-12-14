@@ -7,12 +7,13 @@ export default {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/components/(breadcrumbs|button|card|date-picker|dropdown|image|modal|navbar|ripple|spinner|calendar|date-input|form|popover|menu|divider).js"
   ],
   theme: {
   	extend: {
   		colors: {
   			background: 'var(--background)',
-  			foreground: 'var(--foreground)'
+  			
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
