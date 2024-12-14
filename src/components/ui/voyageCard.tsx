@@ -40,11 +40,14 @@ export default function VoyageCard({
             {prix} <span className="font-light">TND </span>
           </p>
         </div>
-        <Link href={`/voyages/${slug}`}>
-          <Button className="px-6 py-3 bg-primary-600 text-white font-medium rounded text-lg  hover:bg-primary-700 shadow-lg">
-            J&apos;en profite
-          </Button>
-        </Link>
+
+        <Button
+          as={Link}
+          href={`/voyages/${slug}`}
+          className="px-6 py-3 bg-primary-600 text-white font-medium rounded text-lg  hover:bg-primary-700 shadow-lg"
+        >
+          J&apos;en profite
+        </Button>
       </CardFooter>
     </Card>
   );

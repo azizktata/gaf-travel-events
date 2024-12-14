@@ -9,7 +9,7 @@ export default function BreadCrumbs({
 }) {
   return (
     <Breadcrumbs className="text-gray-700">
-      <BreadcrumbItem href="/">Acceuil</BreadcrumbItem>
+      <BreadcrumbItem href="/">Accueil</BreadcrumbItem>
       {BreadcrumbItems.map((item) => (
         <BreadcrumbItem key={item} href={`/${item}`}>
           {" "}

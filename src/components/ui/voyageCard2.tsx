@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
-import { Button } from "@nextui-org/button";
+
 import { Clock, HotelIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import { Hotel, Periode } from "@/types";
+import { Button } from "@nextui-org/button";
 
 export default function VoyageCard2({
   titre,
@@ -68,9 +69,14 @@ export default function VoyageCard2({
           <p className="text-xs text-gray-500">A partir de</p>
           <p className="text-lg text-gray-700 font-semibold">{prix} TND</p>
         </div>
-        <Link href={`/voyages/${slug}`}>
-          <Button className="   bg-[#ffce5b] text-lg rounded">Voir plus</Button>
-        </Link>
+
+        <Button
+          as={Link}
+          href={`/voyages/${slug}`}
+          className="bg-[#ffce5b] text-lg rounded"
+        >
+          Voir plus
+        </Button>
       </CardFooter>
     </Card>
   );

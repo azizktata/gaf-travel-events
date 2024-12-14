@@ -58,10 +58,10 @@ export default async function page({
   return (
     <div>
       <div className="w-[90%] lg:w-[60%] mx-auto mt-8 lg:mt-16 min-h-[100vh]">
-        <BreadCrumbs BreadcrumbItems={["voyages", `${titre}`]} />
+        <BreadCrumbs BreadcrumbItems={["voyages", `${destination}`]} />
         <div>
           <div className="flex justify-between items-center gap-2 mt-8">
-            <h1 className="text-3xl  text-black mt-4 ">{titre}</h1>
+            <h1 className="text-3xl  text-black mt-4 ">{destination}</h1>
             <div className="md:flex gap-4">
               <p className="text-sm text-gray-600 flex flex-col  gap-2 mt-4">
                 {" "}
@@ -85,7 +85,7 @@ export default async function page({
                 <Clock size={16} />
                 {duration}{" "}
               </p>
-              <div className="text-sm text-gray-600 flex gap-2 mt-4 flex items-center mb-6">
+              <div className="text-sm text-gray-600 flex flex-col items-start md:flex-row md:items-center gap-2 mt-4 flex  mb-6">
                 {" "}
                 {hotels &&
                   hotels.map((hotel) => (
@@ -136,7 +136,7 @@ export default async function page({
 
         <div className="mt-8 max-w-[74ch]">
           <h2 className="text-gray-800 text-lg font-semibold">Présentation</h2>
-
+          <p className="text-gray-600">{titre}</p>
           {description && (
             <div className="text-gray-600 mt-4">
               <PortableText value={description as PortableTextBlock[]} />

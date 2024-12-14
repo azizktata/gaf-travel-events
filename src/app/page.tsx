@@ -102,7 +102,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="w-full mb-24">
-        <div className="w-[85%] mx-auto flex flex-col">
+        <div className="w-[85%] mx-auto items-center flex flex-col">
           <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
             Optimisez la gestion de vos déplacements
           </h2>
@@ -114,14 +114,15 @@ export default async function Home() {
             />
             <ProfessionalCard titre="Events" image="/event-3.jpg" />
           </div>
-          <Link className="mx-auto" href="/voyages-daffaires">
-            <Button
-              variant="bordered"
-              className="btn  mt-16 border-[#00A9E0]/70 text-[#00A9E0] text-lg rounded"
-            >
-              Voir plus
-            </Button>
-          </Link>
+
+          <Button
+            variant="bordered"
+            as={Link}
+            href="/voyages-daffaires"
+            className="btn  mt-16 border-[#00A9E0]/70 text-[#00A9E0] text-lg rounded"
+          >
+            Voir plus
+          </Button>
         </div>
       </div>
 

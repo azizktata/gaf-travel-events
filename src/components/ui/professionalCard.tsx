@@ -25,14 +25,15 @@ export default function ProfessionalCard({
           <h1 className="mb-2 text-center font-medium text-2xl lg:text-4xl tracking-widest text-white">
             {titre}
           </h1>
-          <Link href={"/voyages-daffaires"}>
-            <Button
-              variant={"bordered"}
-              className="px-4 py-5 mt-5 rounded-sm text-white font-normal  bg-transparent border-[#B0CEE8]/80"
-            >
-              voir plus
-            </Button>
-          </Link>
+
+          <Button
+            variant={"bordered"}
+            as={Link}
+            className="px-4 py-5 mt-5 rounded-sm text-white font-normal  bg-transparent border-primary/50"
+            href={"/voyages-daffaires"}
+          >
+            voir plus
+          </Button>
         </CardBody>
       </div>
     </Card>

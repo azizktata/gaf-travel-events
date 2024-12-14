@@ -61,12 +61,8 @@ export default function TarifVoyage({
             </p>
           </div>
           <div className="flex mt-4 justify-end">
-            <Button
-              variant="solid"
-              color="primary"
-              onClick={() => setShow((prev) => !prev)}
-            >
-              Reserver
+            <Button color="primary" onPress={() => setShow((prev) => !prev)}>
+              Réserver
             </Button>
           </div>
         </div>

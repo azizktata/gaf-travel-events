@@ -1,7 +1,7 @@
 import BreadCrumbs from "@/components/ui/breadCrumbs";
 import Tarifs from "@/components/ui/tarifs";
 import { Image } from "@nextui-org/image";
-import { LucideCircleDollarSign, MapPinIcon } from "lucide-react";
+import { MapPinIcon } from "lucide-react";
 import React from "react";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
@@ -53,12 +53,14 @@ export default async function page({
         <BreadCrumbs BreadcrumbItems={["hotels", `${nom}`]} />
         <div>
           <div className="flex justify-between items-center gap-2 mt-8">
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col gap-2 items-start sm:flex-row sm:items-center">
               <h1 className="text-2xl  text-gray-800  ">{nom}</h1>
-              <span className="text-sm">{"⭐".repeat(etoile || 0)}</span>
+              <span className="text-xs sm:text-sm">
+                {"⭐".repeat(etoile || 0)}
+              </span>
             </div>
             <div className="sm:flex gap-4">
-              <p className="text-sm text-gray-600 flex flex-col  gap-2 mt-4">
+              <p className="text-xs sm:text-sm text-gray-600 flex flex-col  gap-2 mt-4">
                 {" "}
                 <span>a partir de </span>
                 <span className="font-semibold text-xl text-black">
@@ -72,12 +74,6 @@ export default async function page({
               <p className="text-sm text-gray-600 flex gap-2 mt-4">
                 {" "}
                 <MapPinIcon size={16} /> {adresse}{" "}
-              </p>
-
-              <p className="text-sm sm:hidden text-gray-600 flex gap-2 mt-4">
-                {" "}
-                <LucideCircleDollarSign size={16} /> a partir de{" "}
-                <span className="font-semibold text-black">{prix} TND</span>{" "}
               </p>
             </div>
           </div>

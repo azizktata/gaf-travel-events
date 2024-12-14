@@ -13,6 +13,7 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { VOYAGE_3_QUERYResult } from "@/sanity/types";
+import Link from "next/link";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -80,7 +81,11 @@ export default function Hero({ offres }: { offres: VOYAGE_3_QUERYResult }) {
 
                 {/* Footer Button */}
                 <CardFooter className="absolute bottom-20 left-0 right-0 flex justify-center z-10">
-                  <Button className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl text-lg  hover:bg-primary-700 shadow-lg">
+                  <Button
+                    as={Link}
+                    href={`/voyages/${offre.slug?.current}`}
+                    className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl text-lg  hover:bg-primary-700 shadow-lg"
+                  >
                     J&apos;en profite
                   </Button>
                 </CardFooter>
