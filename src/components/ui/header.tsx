@@ -40,7 +40,12 @@ export default function Header() {
     setIsMenuOpen(false); // Close the menu when an item is clicked
   };
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isMenuOpen={isMenuOpen} isBordered>
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      isMenuOpen={isMenuOpen}
+      isBordered
+      isBlurred={false}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -61,7 +66,7 @@ export default function Header() {
             </DropdownTrigger>
           </NavbarItem>
           <DropdownMenu
-            aria-label="Produits Dolhpines"
+            aria-label="mobile menu"
             className="w-auto  text-center"
             itemClasses={{
               base: "gap-4",
