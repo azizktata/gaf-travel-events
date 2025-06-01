@@ -100,13 +100,27 @@ export default function ReservationForm({
       email: values.email,
     });
 
-    const [ress, res] = await Promise.all([createPromise, emailPromise]);
+    const [createResult, emailResult] = await Promise.allSettled([
+      createPromise,
+      emailPromise,
+    ]);
 
-    if (res?.success && ress) {
+    const createSuccess = createResult.status === "fulfilled";
+    const emailSuccess =
+      emailResult.status === "fulfilled" && emailResult.value?.success;
+
+    if (createSuccess && emailSuccess) {
       toast.success("Votre message a été envoyé avec succès.");
       form.reset();
     } else {
-      toast.error(res?.message);
+      const errorMessage =
+        emailResult.status === "rejected"
+          ? emailResult.reason?.message || "Échec de l'envoi de l'email."
+          : !emailResult.value?.success
+          ? emailResult.value?.message
+          : "Une erreur s'est produite.";
+
+      toast.error(errorMessage);
     }
   }
   return (
