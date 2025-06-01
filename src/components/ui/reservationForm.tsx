@@ -78,15 +78,18 @@ export default function ReservationForm({
     return `${dateRangeText}\n${pensionText}\n${chambresText}`;
   };
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const createPromise = client.create({
-      _type: "reservations",
-      ...values,
-      destination: destination,
-    });
-
     const hotelFormText = hotelForm ? generateHotelFormText(hotelForm) : "";
     const mailText = `Nom: ${values.nom} \n Prénom: ${values.prenom} \nAdultes: ${values.adultes} \nEmail: ${values.email}\n telephone: ${values.telephone}\n Message: ${values.message}`;
     const voyageFormText = voyageForm ? `Voyage: ${voyageForm}` : "";
+    const createPromise = client.create({
+      _type: "reservations",
+      nom: values.nom,
+      prenom: values.prenom,
+      telephone: values.telephone,
+      email: values.email,
+      destination: destination,
+      description: hotelForm ? hotelFormText : voyageFormText,
+    });
     const emailPromise = sendEmail({
       text: hotelForm
         ? `${mailText}\n\n${hotelFormText}`

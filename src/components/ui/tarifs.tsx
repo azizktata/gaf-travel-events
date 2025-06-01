@@ -27,9 +27,15 @@ import { HotelFormData } from "@/types";
 export default function Tarifs({
   destination,
   prix,
+  pensions,
 }: {
   destination: string;
   prix: number;
+  pensions: {
+    _key: string;
+    service: string;
+    prix: number;
+  }[];
 }) {
   const [show, setShow] = React.useState(true);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -78,22 +84,37 @@ export default function Tarifs({
     [selectedPensionKeys]
   );
 
+  // current date range state
+
   const [value, setValue] = React.useState({
-    start: parseDate("2024-04-01"),
-    end: parseDate("2024-04-08"),
+    start: parseDate(
+      // today's date
+      new Date().toISOString().split("T")[0] // Format to YYYY-MM-DD
+    ),
+    end: parseDate(
+      // today's date + 1 day
+      new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0] // Format to YYYY-MM-DD
+    ),
   });
 
   const formatter = useDateFormatter({ dateStyle: "long" });
 
   const [formData, setFormData] = React.useState({} as HotelFormData);
 
+  // const pensionPrices = {
+  //   "petit déjeuner": 10,
+  //   "Demi-pension": 20,
+  //   "Pension Compléte": 30,
+  // };
+
   // Update aggregated data whenever individual states change
   React.useEffect(() => {
-    const pensionPrices = {
-      "petit déjeuner": 10,
-      "Demi-pension": 20,
-      "Pension Compléte": 30,
-    };
+    const pensionPrices = pensions.reduce((acc, pension) => {
+      acc[pension.service] = pension.prix;
+      return acc;
+    }, {} as Record<string, number>);
     setFormData({
       chambres: chambres.map((chambre) => ({
         id: chambre.id,
@@ -113,15 +134,12 @@ export default function Tarifs({
       (1000 * 60 * 60 * 24);
 
     const chambreCost = chambres.length * nightlyRatePerChambre * nights;
-
-    const selectedPensionKey = Array.from(selectedPensionKeys).join(
-      ", "
-    ) as keyof typeof pensionPrices;
-    const pensionCost =
-      (pensionPrices[selectedPensionKey] || 0) * chambres.length;
+    const selectedPensionKey = Array.from(selectedPensionKeys).join(", ");
+    const pensionCost = pensionPrices[selectedPensionKey] || 0;
 
     setTotalPrice(chambreCost + pensionCost);
-  }, [chambres, selectedPensionKeys, value, nightlyRatePerChambre]);
+    // setTotalPrice(chambreCost + pensionCost);
+  }, [chambres, selectedPensionKeys, value, nightlyRatePerChambre, pensions]);
   return (
     <div className="">
       <Card className="rounded-sm p-2">
@@ -178,11 +196,11 @@ export default function Tarifs({
                 setSelectedPensionKeys(keys as Set<string>)
               }
             >
-              <DropdownItem key="petit déjeuner">Petit déjeuner</DropdownItem>
-              <DropdownItem key="Demi-pension">Demi-pension</DropdownItem>
-              <DropdownItem key="Pension Compléte">
-                Pension Compléte
-              </DropdownItem>
+              {pensions.map((pension) => (
+                <DropdownItem key={pension.service}>
+                  {pension.service} - {pension.prix} TND
+                </DropdownItem>
+              ))}
             </DropdownMenu>
           </Dropdown>
           <div>

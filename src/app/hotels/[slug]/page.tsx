@@ -37,8 +37,9 @@ export default async function page({
     description,
     listImage,
     emplacement,
+    services,
   } = hotel;
-
+  // console.log(services);
   const hotelImageUrl = mainImage
     ? urlFor(mainImage)?.width(550).height(310).url()
     : null;
@@ -111,7 +112,15 @@ export default async function page({
           {description && <PortableText value={description} />}
         </div>
         <div className="mt-8 ">
-          <Tarifs destination={nom || ""} prix={prix || 50} />
+          <Tarifs
+            destination={nom || ""}
+            prix={prix || 50}
+            pensions={(services ?? []).map(({ _key, service, prix }) => ({
+              _key,
+              service: service ?? "",
+              prix: prix ?? 0,
+            }))}
+          />
         </div>
 
         {emplacement && (
