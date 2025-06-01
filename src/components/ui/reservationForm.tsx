@@ -88,7 +88,11 @@ export default function ReservationForm({
       telephone: values.telephone,
       email: values.email,
       destination: destination,
-      description: hotelForm ? hotelFormText : voyageFormText,
+      description: hotelForm
+        ? `Nouveau message de réservation d'Hôtel ${destination}` +
+          hotelFormText
+        : `Nouveau message de réservation Voyage ${destination}` +
+          voyageFormText,
     });
     const emailPromise = sendEmail({
       text: hotelForm
@@ -97,7 +101,6 @@ export default function ReservationForm({
       sujet: hotelForm
         ? `Nouveau message de réservation d'Hôtel ${destination}`
         : `Nouveau message de réservation Voyage ${destination}`,
-      email: values.email,
     });
 
     const [createResult, emailResult] = await Promise.allSettled([

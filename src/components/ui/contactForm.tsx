@@ -41,7 +41,6 @@ export default function ContactForm() {
     const res = await sendEmail({
       text: mailText,
       sujet: "Nouveau message de contact",
-      email: values.email,
     });
     if (res?.success) {
       toast.success("Votre message a été envoyé avec succès.");

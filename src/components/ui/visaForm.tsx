@@ -78,7 +78,6 @@ export default function VisaForm() {
     const emailPromise = sendEmail({
       text: mailText,
       sujet: "Nouveau message de demande de visa",
-      email: values.email,
     });
     const [ress, res] = await Promise.all([createPromise, emailPromise]);
     if (res?.success && ress) {
