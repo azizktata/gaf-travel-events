@@ -38,12 +38,15 @@ export default function VoyageCard2({
       </CardHeader>
       <CardBody className="pb-8 pt-2 px-4 flex-col items-start gap-4">
         <h3 className="text-2xl text-black">{titre}</h3>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {hotels &&
             hotels.map((hotel) => (
               <div key={hotel.hotel} className="flex items-center gap-2">
                 <HotelIcon size={16} />
-                <span className="text-sm text-gray-500">{hotel.hotel}</span>
+                <span className="text-sm text-gray-500">
+                  {hotel.hotel?.slice(0, 30)}
+                  {(hotel.hotel?.length ?? 0) > 10 ? "..." : ""}
+                </span>
               </div>
             ))}
         </div>

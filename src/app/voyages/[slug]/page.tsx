@@ -74,7 +74,7 @@ export default async function page({
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="md:flex gap-4">
+            <div className="md:flex flex-wrap gap-4">
               <p className="text-sm text-gray-600 flex gap-2 mt-4">
                 {" "}
                 <MapPinIcon size={16} /> {destination}{" "}
@@ -92,7 +92,7 @@ export default async function page({
                     <div key={hotel.hotel} className="flex items-center gap-2">
                       <Hotel size={16} />
                       <span className="text-sm text-gray-500">
-                        {hotel.hotel}
+                        {hotel.hotel?.split("–")[0]}
                       </span>
                     </div>
                   ))}
@@ -108,7 +108,7 @@ export default async function page({
               ))}
           </div>
 
-          <div className="mt-8 flex flex-col md:flex-row gap-2 w-full">
+          {/* <div className="mt-8 flex flex-col md:flex-row gap-2 w-full">
             <div className="w-full ">
               <Image
                 src={mainImageUrl || "https://placehold.co/550x310/png"}
@@ -120,12 +120,51 @@ export default async function page({
             </div>
             <div className="columns-2 gap-1 mb-1 md:flex md:flex-col">
               {listImagesUrls &&
+                listImagesUrls
+                  .slice(0, 2)
+                  .map((imageUrl, index: number) => (
+                    <Image
+                      key={index}
+                      src={imageUrl || "https://placehold.co/550x310/png"}
+                      alt="hotel"
+                      width={500}
+                      height={200}
+                      className="object-cover rounded-xs mb-1"
+                    />
+                  ))}
+            </div>
+            <div className="columns-2 gap-1 mb-1 md:flex md:flex-col">
+              {listImagesUrls &&
+                listImagesUrls
+                  .slice(2, 4)
+                  .map((imageUrl, index: number) => (
+                    <Image
+                      key={index}
+                      src={imageUrl || "https://placehold.co/550x310/png"}
+                      alt="hotel"
+                      width={500}
+                      height={200}
+                      className="object-cover rounded-xs mb-1"
+                    />
+                  ))}
+            </div>
+          </div> */}
+          <div className="pt-3">
+            <div className="columns-1 gap-5 sm:columns-2 sm:gap-2 md:columns-3 [&>img:not(:first-child)]:mt-8">
+              <Image
+                src={mainImageUrl || "https://placehold.co/550x310/png"}
+                alt="hotel"
+                width={1080} // Use width={0} to enable automatic scaling with Tailwind classes
+                height={0}
+                className="object-cover h-[400px] w-full rounded-xs"
+              />
+              {listImagesUrls &&
                 listImagesUrls.map((imageUrl, index: number) => (
                   <Image
                     key={index}
                     src={imageUrl || "https://placehold.co/550x310/png"}
                     alt="hotel"
-                    width={500}
+                    width={1080}
                     height={200}
                     className="object-cover rounded-xs mb-1"
                   />
@@ -209,12 +248,17 @@ export default async function page({
             {hotels.map((hotel) => (
               <p className="flex flex-wrap items-center gap-2" key={hotel._key}>
                 <Hotel style={{ width: "18px", height: "18px" }} />
-                {hotel.hotel} : a partir de{" "}
-                <span className="font-semibold text-black">
-                  {" "}
-                  {hotel.prix} TND
-                </span>
-                (adulte par nuit)
+                {hotel.hotel}
+                {hotel.prix && (
+                  <>
+                    <span>a partir de </span>
+                    <span className="font-semibold text-black">
+                      {" "}
+                      {hotel.prix} TND
+                    </span>
+                    (adulte par nuit)
+                  </>
+                )}
               </p>
             ))}
           </div>
