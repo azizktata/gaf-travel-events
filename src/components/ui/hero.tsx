@@ -41,7 +41,7 @@ export default function Hero({ offres }: { offres: VOYAGE_3_QUERYResult }) {
             <div>
               <Card className="relative w-full h-[600px] rounded-none overflow-hidden shadow-xl bg-gray-800">
                 {/* Price Header */}
-                <CardHeader className="absolute z-10 left-0 right-0 flex justify-center mt-32 flex flex-col mx-auto max-w-xs bg-white/90 rounded-xs px-4 py-2">
+                <CardHeader className="absolute z-10 left-0 right-0 flex justify-center mt-32 flex flex-col mx-auto max-w-xs bg-white/90 rounded-xl px-4 py-2">
                   <p className="text-[#005bc4] font-semibold">
                     {offre.duration}
                   </p>
@@ -84,7 +84,8 @@ export default function Hero({ offres }: { offres: VOYAGE_3_QUERYResult }) {
                   <Button
                     as={Link}
                     href={`/voyages/${offre.slug?.current}`}
-                    className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl text-lg  hover:bg-primary-700 shadow-lg"
+                    radius="sm"
+                    className="px-6 py-4 bg-primary-600 text-white font-semibold  text-lg  hover:bg-primary-700 "
                   >
                     J&apos;en profite
                   </Button>

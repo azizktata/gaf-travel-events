@@ -104,7 +104,7 @@ export default async function Home() {
       </div>
       <div className="w-full mb-24">
         <div className="w-[85%] mx-auto items-center flex flex-col">
-          <h2 className="text-2xl font-bold text-center my-8 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
+          <h2 className="text-2xl md:text-4xl font-medium text-center mb-16 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
             Optimisez la gestion de vos déplacements
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -127,8 +127,8 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="bg-gray-100 py-8 mb-24">
-        <h2 className="text-2xl font-bold text-center my-8 mb-16 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
+      <div className="bg-gray-100 py-16 ">
+        <h2 className="text-2xl md:text-4xl font-medium text-center mb-16 mb-16 relative after:content-[''] after:block after:w-12 after:h-[3px] after:bg-primary-600 after:mx-auto after:mt-2">
           Contactez nous
         </h2>
         <div className="max-w-md mx-auto px-4">

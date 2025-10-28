@@ -104,8 +104,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-8 border-t text-gray-300 border-gray-700 pt-4 text-center">
-        <p>© 2024 GAF Voayges. Tous droits réservés.</p>
+      <div className="mt-8 pt-8  border-t text-gray-300 border-gray-700 text-center text-sm">
+        <p>© {new Date().getFullYear()} GAF Voyages. Tous droits réservés.</p>
       </div>
     </footer>
   );
