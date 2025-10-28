@@ -29,10 +29,10 @@ export default function ProfessionalCard({
           <Button
             variant={"bordered"}
             as={Link}
-            className="px-4 py-5 mt-5 rounded-sm text-white font-normal  bg-transparent border-primary/50"
+            className="px-4 py-5 mt-5 rounded-lg text-white font-normal  bg-primary border-primary/50"
             href={"/voyages-daffaires"}
           >
-            voir plus
+            Voir plus
           </Button>
         </CardBody>
       </div>

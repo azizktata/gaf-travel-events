@@ -85,7 +85,7 @@ export default async function page({
                 <Clock size={16} />
                 {duration}{" "}
               </p>
-              <div className="text-sm text-gray-600 flex flex-col items-start md:flex-row md:items-center gap-2 mt-4 flex  mb-6">
+              <div className="text-sm text-gray-600 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-4   mb-6">
                 {" "}
                 {hotels &&
                   hotels.map((hotel) => (

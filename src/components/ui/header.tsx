@@ -62,7 +62,9 @@ export default function Header() {
         <Dropdown>
           <NavbarItem>
             <DropdownTrigger className="cursor-pointer">
+               <Link className="text-base" href="/voyages">
               Voyages
+               </Link>
             </DropdownTrigger>
           </NavbarItem>
           <DropdownMenu
