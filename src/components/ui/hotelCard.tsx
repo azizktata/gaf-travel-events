@@ -24,7 +24,6 @@ export default function HotelCard({
     <Card className="pb-4 rounded-none">
       <CardHeader className="overflow-visible w-full   p-0 ">
         <Image
-          isZoomed
           alt="Card background"
           className="object-cover w-full h-full "
           src={image}
