@@ -10,6 +10,7 @@ import {
   fetchVoaygesByFilterOpions,
 } from "@/utils/getData";
 import { Hotel, Periode } from "@/types";
+export const revalidate = 0;
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -27,7 +28,7 @@ export default async function page({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const { type = "", destination = "" } = await searchParams;
-
+  
   const voyages = await fetchVoaygesByFilterOpions(type, destination);
   const destinations = (await fetchDestOfVoyages())
     .map((voyage) => voyage.destination)
